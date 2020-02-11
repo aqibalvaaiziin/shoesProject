@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/home_page.dart';
+import 'package:shoes/pages/profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,11 +20,10 @@ class _MyAppState extends State<MyApp> {
         child: Scaffold(
           appBar: AppBar(
             title: Center(
-              child: Text(
-                "Shoes Shop",
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
+                child: Image(
+              image: AssetImage("assets/images/an.png"),
+              width: 230,
+            )),
             backgroundColor: Color(0xFFf4f6fb),
             bottom: TabBar(
               indicator: BoxDecoration(
@@ -48,13 +48,19 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               HomePage(),
               Center(
-                child: Text("Favourite Item"),
+                child: Text(
+                  "Favourite Item",
+                  style: TextStyle(fontSize: 30),
+                ),
               ),
               Center(
-                child: Text("History Transaction of user"),
+                child: Text(
+                  "Transaction History of user",
+                  style: TextStyle(fontSize: 30),
+                ),
               ),
               Center(
-                child: Text("Profile"),
+                child: ProfilePage(),
               ),
             ],
           ),

@@ -24,6 +24,14 @@ class CustomIcon {
     FontAwesome.shopping_cart,
     color: Colors.black,
   );
+  static const Icon camera = Icon(
+    FontAwesome.camera,
+    color: Colors.white,
+  );
+  static const Icon pencil = Icon(
+    FontAwesome.pencil,
+    color: Colors.grey,
+  );
   static const Icon back = Icon(
     FontAwesome.arrow_left,
     color: Colors.black,
