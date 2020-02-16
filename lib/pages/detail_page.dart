@@ -19,17 +19,20 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+      body: Container(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: CustomIcon.back,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: CustomIcon.back,
+                ),
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -53,6 +56,7 @@ class _DetailPageState extends State<DetailPage> {
                       Positioned(
                         top: 360,
                         child: Container(
+                          margin: EdgeInsets.only(left: 20),
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.5,
                           child: Row(
@@ -154,8 +158,11 @@ class _DetailPageState extends State<DetailPage> {
                       Transform.translate(
                         offset: Offset(20, 460),
                         child: Container(
+                            margin: EdgeInsets.only(left: 20),
                             width: MediaQuery.of(context).size.width * 0.8,
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
                                   widget.shoesName,

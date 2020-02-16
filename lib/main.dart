@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/profile.dart';
+import 'package:shoes/widgets/universal/custom_button.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,12 +54,7 @@ class _MyAppState extends State<MyApp> {
                   style: TextStyle(fontSize: 30),
                 ),
               ),
-              Center(
-                child: Text(
-                  "Transaction History of user",
-                  style: TextStyle(fontSize: 30),
-                ),
-              ),
+              CustomButton(Colors.red, Colors.white, "lala"),
               Center(
                 child: ProfilePage(),
               ),

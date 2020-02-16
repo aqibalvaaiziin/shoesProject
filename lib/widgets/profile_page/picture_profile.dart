@@ -19,7 +19,7 @@ class _PictureProfileState extends State<PictureProfile> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 image: AssetImage("assets/images/zayn-malik-1.jpg"),
               ),
             ),
@@ -30,7 +30,8 @@ class _PictureProfileState extends State<PictureProfile> {
             child: Container(
               width: 55,
               height: 55,
-              decoration: BoxDecoration(color: Colors.grey,shape: BoxShape.circle),
+              decoration:
+                  BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
               child: CustomIcon.camera,
             ),
           )
