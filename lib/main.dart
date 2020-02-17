@@ -4,6 +4,8 @@ import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/profile.dart';
 import 'package:shoes/widgets/universal/custom_button.dart';
 
+import 'pages/main_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -48,12 +50,7 @@ class _MyAppState extends State<MyApp> {
           body: TabBarView(
             children: <Widget>[
               HomePage(),
-              Center(
-                child: Text(
-                  "Favourite Item",
-                  style: TextStyle(fontSize: 30),
-                ),
-              ),
+              MainPage(),
               CustomButton(Colors.red, Colors.white, "lala"),
               Center(
                 child: ProfilePage(),

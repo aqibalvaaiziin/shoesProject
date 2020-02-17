@@ -18,10 +18,8 @@ class MainPage extends StatelessWidget {
               height: 15,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
-              height: 180,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 6.3),
+              child: Wrap(
                 children: <Widget>[
                   CardProduts(
                       "assets/images/adidas1.png", "Black Yezzy", 5000000),

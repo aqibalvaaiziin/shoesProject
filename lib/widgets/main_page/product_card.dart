@@ -18,9 +18,9 @@ class CardProduts extends StatelessWidget {
         );
       },
       child: Container(
-        width: 130,
-        margin: EdgeInsets.only(right: 20),
+        width: 180,
         height: 180,
+        margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
@@ -34,12 +34,6 @@ class CardProduts extends StatelessWidget {
                 width: 80,
                 height: 15,
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(.4),
-                        blurRadius: 7,
-                        offset: Offset(37, 77)),
-                  ],
                 ),
               ),
               Transform.translate(
@@ -71,8 +65,7 @@ class CardProduts extends StatelessWidget {
                       "Rp. " + price.toString(),
                       style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey),
+                          color: Colors.red),
                     ),
                   ],
                 ),
