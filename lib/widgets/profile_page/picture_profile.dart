@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:shoes/icons/icon.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PictureProfile extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class PictureProfile extends StatefulWidget {
 }
 
 class _PictureProfileState extends State<PictureProfile> {
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,21 +23,11 @@ class _PictureProfileState extends State<PictureProfile> {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/zayn-malik-1.jpg"),
+                image:
+                    AssetImage("assets/images/user.png")
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              width: 55,
-              height: 55,
-              decoration:
-                  BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
-              child: CustomIcon.camera,
-            ),
-          )
         ],
       ),
     );

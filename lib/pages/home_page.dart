@@ -19,29 +19,32 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ]),
-        Stack(
-          children: <Widget>[
-            Image.asset(
-              "assets/images/nemesis.jpg",
-            ),
-            Positioned(
-              right: 10,
-              bottom: 20,
-              child: Image.asset(
-                "assets/images/messi.png",
-                width: 110,
-                height: 110,
+        Transform.translate(
+          offset: Offset(0, -22),
+          child: Stack(
+            children: <Widget>[
+              Image.asset(
+                "assets/images/nemesis.jpg",
               ),
-            ),
-            Positioned(
-              left: 10,
-              bottom: -2,
-              child: GestureDetector(
-                onTap: () {},
-                child: CustomButton(Colors.white, Colors.black, "Sport"),
+              Positioned(
+                right: 10,
+                bottom: 20,
+                child: Image.asset(
+                  "assets/images/messi.png",
+                  width: 110,
+                  height: 110,
+                ),
               ),
-            ),
-          ],
+              Positioned(
+                left: 10,
+                bottom: -2,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: CustomButton(Colors.white, Colors.black, "Sport"),
+                ),
+              ),
+            ],
+          ),
         )
       ],
     );

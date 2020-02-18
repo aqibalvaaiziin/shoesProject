@@ -24,6 +24,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   flutter_icons: ^1.0.0+1
   cupertino_icons: ^0.1.2
+  image_picker: ^0.6.3+1
+  rflutter_alert: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -60,7 +62,7 @@ flutter:
 
     - family: nhl2
       fonts:
-        - asset: assets/fonts/NHLEPho_.ttf      
+        - asset: assets/fonts/NHLEPho_.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

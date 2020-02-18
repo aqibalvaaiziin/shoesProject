@@ -30,7 +30,7 @@ class CustomIcon {
   );
   static const Icon pencil = Icon(
     FontAwesome.pencil,
-    color: Colors.grey,
+    color: Colors.white,
   );
   static const Icon back = Icon(
     FontAwesome.arrow_left,
@@ -40,4 +40,6 @@ class CustomIcon {
     FontAwesome.arrow_circle_o_right,
     color: Colors.black,
   );
+
+  static const Icon profileUser = Icon(FontAwesome.user_circle);
 }

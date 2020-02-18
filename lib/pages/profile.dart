@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/icons/icon.dart';
 import 'package:shoes/widgets/profile_page/picture_profile.dart';
 import 'package:shoes/widgets/profile_page/profile.dart';
+
+import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -15,9 +18,24 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           PictureProfile(),
-          SizedBox(height: 50,),
+          SizedBox(
+            height: 50,
+          ),
           Profile()
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return EditProfilePage();
+              },
+            ),
+          );
+        },
+        child: CustomIcon.pencil,
       ),
     );
   }
