@@ -35,6 +35,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
           Stack(
             children: <Widget>[
               Positioned(
+                top: 70,
+                left: 135,
+                child: Text("Edit Profile",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color: Colors.grey),),
+              ),
+              Positioned(
                 left: 115,
                 top: 70,
                 child: Container(
@@ -166,7 +171,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               Positioned(
-                top: 60,
+                top: 30,
                 left: 20,
                 child: GestureDetector(
                     onTap: () {
