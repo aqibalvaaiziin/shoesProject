@@ -6,7 +6,8 @@ class CustomIcon {
   static const Icon bag = Icon(FontAwesome.shopping_bag, color: Colors.black);
   static const Icon search = Icon(
     FontAwesome.search,
-    size: 15,
+    size: 20,
+    color: Colors.grey,
   );
   static const Icon home = Icon(
     FontAwesome.home,
@@ -39,6 +40,17 @@ class CustomIcon {
   static const Icon right = Icon(
     FontAwesome.arrow_circle_o_right,
     color: Colors.black,
+  );
+
+  static const Icon outlineHeart = Icon(
+    FontAwesome.heart_o,
+    color: Colors.black,
+    size: 25,
+  );
+
+  static const Icon redHeart = Icon(
+    FontAwesome.heart,
+    color: Colors.red,
   );
 
   static const Icon profileUser = Icon(FontAwesome.user_circle);

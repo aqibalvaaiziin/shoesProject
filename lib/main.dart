@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/profile.dart';
-import 'package:shoes/widgets/universal/custom_button.dart';
 
 import 'pages/main_page.dart';
 
@@ -21,16 +20,29 @@ class _MyAppState extends State<MyApp> {
       home: DefaultTabController(
         length: 4,
         child: Scaffold(
-          appBar: AppBar(
-            title: Center(
-                child: Image(
-              image: AssetImage("assets/images/an.png"),
-              width: 230,
-            )),
-            backgroundColor: Color(0xFFf4f6fb),
-            bottom: TabBar(
+          body: TabBarView(
+            children: <Widget>[
+              HomePage(),
+              MainPage(),
+              Center(
+                  child: Text(
+                "19000",
+                style: TextStyle(fontSize: 30, fontFamily: "FL"),
+              )),
+              Center(
+                child: ProfilePage(),
+              ),
+            ],
+          ),
+          bottomNavigationBar: Container(
+            color: Colors.grey[200],
+            child: TabBar(
+              labelColor: Colors.black,
               indicator: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.black))),
+                  border: Border(
+                    top: BorderSide(color: Colors.black),
+                  ),
+                  color: Colors.white),
               tabs: <Widget>[
                 Tab(
                   icon: CustomIcon.home,
@@ -46,16 +58,6 @@ class _MyAppState extends State<MyApp> {
                 ),
               ],
             ),
-          ),
-          body: TabBarView(
-            children: <Widget>[
-              HomePage(),
-              MainPage(),
-              CustomButton(Colors.red, Colors.white, "lala"),
-              Center(
-                child: ProfilePage(),
-              ),
-            ],
           ),
         ),
       ),

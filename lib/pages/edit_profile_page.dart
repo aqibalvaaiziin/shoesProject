@@ -37,7 +37,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Positioned(
                 top: 70,
                 left: 135,
-                child: Text("Edit Profile",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color: Colors.grey),),
+                child: Text(
+                  "Edit Profile",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey),
+                ),
               ),
               Positioned(
                 left: 115,
