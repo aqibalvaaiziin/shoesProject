@@ -54,9 +54,9 @@ class MainPage extends StatelessWidget {
               child: Wrap(
                 children: <Widget>[
                   CardProducts("assets/images/ozwb.png","Adidas Bagus", 30000,true),
-                  CardProducts("assets/images/ozwbl.png","Adidas Bagus", 30000,true),
+                  CardProducts("assets/images/ozwbl.png","Adidas Bagus", 30000,false),
                   CardProducts("assets/images/ozwmcn.png","Adidas Bagus", 30000,false),
-                  CardProducts("assets/images/ozwp.png","Adidas Bagus", 30000,false),
+                  CardProducts("assets/images/ozwp.png","Adidas Bagus", 30000,true),
                   CardProducts("assets/images/ozwpr.png","Adidas Bagus", 30000,true),
                 ],
               ),
