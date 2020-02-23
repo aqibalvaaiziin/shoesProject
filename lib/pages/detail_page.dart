@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
+import 'package:shoes/widgets/detail_page/size_shoes.dart';
 
 class DetailPage extends StatefulWidget {
   final shoesImage;
@@ -23,10 +24,14 @@ class _DetailPageState extends State<DetailPage> {
         children: [
           Transform.translate(
             offset: Offset(-165, 20),
-            child: CustomIcon.back,
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: CustomIcon.back),
           ),
           SizedBox(
-            height:50,
+            height: 50,
           ),
           Center(
             child: Text(
@@ -49,8 +54,8 @@ class _DetailPageState extends State<DetailPage> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(60.0),
-                      topRight: Radius.circular(60.0),
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
                     ),
                     color: Colors.white,
                   ),
@@ -60,8 +65,8 @@ class _DetailPageState extends State<DetailPage> {
               ),
               Center(
                 child: Container(
-                  width: 250,
-                  height: 250,
+                  width: 330,
+                  height: 330,
                   decoration: BoxDecoration(
                       color: Colors.white, shape: BoxShape.circle),
                 ),
@@ -77,108 +82,237 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
               ),
-              Center(
-                child: Hero(
-                  tag: widget.shoesImage,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(widget.shoesImage),
-                            fit: BoxFit.cover)),
-                    height: 250.0,
-                    width: 250.0,
+              Positioned(
+                top: -40,
+                left: 20,
+                child: Center(
+                  child: Hero(
+                    tag: widget.shoesImage,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(widget.shoesImage),
+                              fit: BoxFit.cover)),
+                      height: 350.0,
+                      width: 350.0,
+                    ),
                   ),
                 ),
               ),
               Positioned(
-                top: 250.0,
-                left: 25.0,
-                right: 25.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          '\$.' + widget.shoesPrice.toString(),
-                          style: TextStyle(fontSize: 20.0, color: Colors.grey),
-                        ),
-                        Container(
-                          height: 25.0,
-                          color: Colors.grey,
-                          width: 1.0,
-                        ),
-                        Container(
-                          width: 125.0,
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                              color: Color(0xff7a9bee),
-                              borderRadius: BorderRadius.circular(11.0)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    if (counter <= 0) {
-                                      counter = 0;
-                                    } else {
-                                      counter -= 1;
-                                      total -= int.parse(
-                                          widget.shoesPrice.toString());
-                                    }
-                                  });
-                                },
-                                child: Container(
-                                  height: 25.0,
-                                  width: 25.0,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(7.0),
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.remove,
-                                    color: Color(0xff7a9bee),
-                                    size: 20.0,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                counter.toString(),
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15.0),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    counter += 1;
-                                    total +=
-                                        int.parse(widget.shoesPrice.toString());
-                                  });
-                                },
-                                child: Container(
-                                  height: 25.0,
-                                  width: 25.0,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(7.0),
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Color(0xff7a9bee),
-                                    size: 20.0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                top: 230,
+                left: 20,
+                right: 20,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 1,
+                  color: Colors.grey[200],
                 ),
               ),
+              Positioned(
+                top: 250,
+                left: 22,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 100,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Deskripsi",
+                        style: TextStyle(fontFamily: 'F', color: Colors.grey),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "Lorem ipsum  Facilis, fugit ipsa! Omnis soluta consectetur placeat quod nisi, totam eaque aliquid magni fugiat earum dolorum quo?",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 350,
+                left: 20,
+                right: 20,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 1,
+                  color: Colors.grey[200],
+                ),
+              ),
+              Positioned(
+                top: 370,
+                left: 22,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.702,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Ukuran",
+                        style: TextStyle(fontFamily: 'F', color: Colors.grey),
+                      ),
+                      Text(
+                        "Jumlah",
+                        style: TextStyle(fontFamily: 'F', color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 392,
+                left: 15,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        child: Row(
+                          children: <Widget>[
+                            SizeShoes("40", true),
+                            SizeShoes("43", false),
+                            SizeShoes("44", false),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 2,
+                        height: 25,
+                        color: Colors.grey,
+                      ),
+                      Container(
+                        width: 125.0,
+                        height: 40.0,
+                        decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(11.0)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (counter <= 0) {
+                                    counter = 0;
+                                  } else {
+                                    counter -= 1;
+                                    total -=
+                                        int.parse(widget.shoesPrice.toString());
+                                  }
+                                });
+                              },
+                              child: Container(
+                                height: 25.0,
+                                width: 25.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7.0),
+                                  color: Colors.white,
+                                ),
+                                child: Icon(
+                                  Icons.remove,
+                                  color: Colors.black54,
+                                  size: 20.0,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              counter.toString(),
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 15.0),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  counter += 1;
+                                  total +=
+                                      int.parse(widget.shoesPrice.toString());
+                                });
+                              },
+                              child: Container(
+                                height: 25.0,
+                                width: 25.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7.0),
+                                  color: Colors.white,
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black54,
+                                  size: 20.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 500,
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Image(
+                        width: 150,
+                        height: 150,
+                        image: AssetImage("assets/images/adidas.png"),
+                      ),
+                      Container(
+                        width: 170,
+                        height: 100,
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(width: 5),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            CustomIcon.cart,
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Add To Cart +",
+                              style: TextStyle(
+                                fontFamily: "NHL",
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Transform.translate(
+                offset: Offset(280, 470),
+                child: Image(
+                  width: 100,
+                  height: 100,
+                  image: AssetImage("assets/images/adidascart.png"),
+                ),
+              )
             ],
           ),
         ],

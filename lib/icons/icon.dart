@@ -54,4 +54,6 @@ class CustomIcon {
   );
 
   static const Icon profileUser = Icon(FontAwesome.user_circle);
+
+  static const Icon cart = Icon(FontAwesome.shopping_cart,size: 30,);
 }
