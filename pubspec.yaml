@@ -77,5 +77,9 @@ flutter:
     - family: D
       fonts:
         - asset: assets/fonts/D-DINCondensed.otf
+    - family: "AD"
+      fonts:
+        - asset: assets/fonts/ITCAvantGardeStd-Demi.otf
+  
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

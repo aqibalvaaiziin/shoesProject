@@ -37,6 +37,10 @@ class CustomIcon {
     FontAwesome.arrow_left,
     color: Colors.black,
   );
+  static const Icon backW = Icon(
+    FontAwesome.arrow_left,
+    color: Colors.white,
+  );
   static const Icon right = Icon(
     FontAwesome.arrow_circle_o_right,
     color: Colors.black,
