@@ -28,7 +28,7 @@ class CardProducts extends StatelessWidget {
             color: Color(0xFFf4f6fb),
           ),
           Positioned(
-            top: 3,
+            top: 0,
             left: 5,
             child: Container(
               width: MediaQuery.of(context).size.width * 0.45,
@@ -37,13 +37,32 @@ class CardProducts extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    top: 40,
+                    top: 163,
+                    left: 25,
+                    child: Container(
+                      width: 135,
+                      height: 6,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 5,
+                              blurRadius: 13)
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
                     right: 0,
                     left: 0,
-                    child: Image.asset(
-                      image,
-                      width: 165,
-                      height: 230,
+                    child: RotationTransition(
+                      turns: AlwaysStoppedAnimation(-15 / 360),
+                      child: Image.asset(
+                        image,
+                        width: 165,
+                        height: 230,
+                      ),
                     ),
                   ),
                 ],
