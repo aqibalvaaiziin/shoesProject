@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/widgets/detail_page/size_shoes.dart';
 
+import 'chart_page.dart';
+
 class DetailPage extends StatefulWidget {
   final shoesImage;
   final shoesName;
@@ -19,6 +21,35 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          print("object");
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ChartPage(),
+            ),
+          );
+        },
+        child: Container(
+          width: 250,
+          height: 55,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Center(
+            child: Text(
+              "Jumlah Item yang dibeli : 4",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "D",
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -35,13 +66,10 @@ class _DetailPageState extends State<DetailPage> {
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: CustomIcon.backW),
+                      child: Container(child: CustomIcon.backW)),
                 ),
                 SizedBox(
-                  height: 50,
-                ),
-                SizedBox(
-                  height: 30,
+                  height: 80,
                 ),
                 Stack(
                   children: <Widget>[

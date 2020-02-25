@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
+import 'package:shoes/pages/chart_page.dart';
 import 'package:shoes/widgets/main_page/product_card.dart';
 
 class MainPage extends StatefulWidget {
@@ -12,6 +13,35 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          print("object");
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ChartPage(),
+            ),
+          );
+        },
+        child: Container(
+          width: 250,
+          height: 55,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Center(
+            child: Text(
+              "Jumlah Item yang dibeli : 4",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "D",
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         elevation: 7,
         automaticallyImplyLeading: false,
