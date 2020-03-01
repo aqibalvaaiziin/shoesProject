@@ -60,6 +60,7 @@ class CustomIcon {
   static const Icon remove = Icon(
     FontAwesome.remove,
     color: Colors.white,
+    size: 15,
   );
   static const Icon profileUser = Icon(FontAwesome.user_circle);
 

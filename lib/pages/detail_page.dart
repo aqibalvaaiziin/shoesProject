@@ -23,7 +23,6 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       floatingActionButton: GestureDetector(
         onTap: () {
-          print("object");
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => ChartPage(),
@@ -39,7 +38,7 @@ class _DetailPageState extends State<DetailPage> {
           ),
           child: Center(
             child: Text(
-              "Jumlah Item yang dibeli : 4",
+              "Jumlah Item yang dibeli : 6",
               style: TextStyle(
                   fontSize: 18,
                   fontFamily: "D",
@@ -83,8 +82,8 @@ class _DetailPageState extends State<DetailPage> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40.0),
-                            topRight: Radius.circular(40.0),
+                            topLeft: Radius.circular(100.0),
+                            topRight: Radius.circular(100.0),
                           ),
                           color: Colors.white,
                         ),
@@ -94,10 +93,12 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     Center(
                       child: Container(
-                        width: 330,
-                        height: 330,
+                        width: 375,
+                        height: 375,
                         decoration: BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
                     Positioned(
