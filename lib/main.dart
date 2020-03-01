@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shoes/icons/icon.dart';
+import 'package:shoes/pages/favourite_page.dart';
 import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/profile.dart';
-
-import 'pages/main_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +29,7 @@ class _MyAppState extends State<MyApp> {
           body: TabBarView(
             children: <Widget>[
               HomePage(),
-              MainPage(),
+              FavouritePage(),
               Center(
                   child: Text(
                 "19000",
