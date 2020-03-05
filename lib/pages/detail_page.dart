@@ -52,7 +52,7 @@ class _DetailPageState extends State<DetailPage> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-          colors: [Colors.grey, Colors.white],
+          colors: [Colors.grey, Colors.white, Colors.grey],
         )),
         child: ListView(
           children: [
@@ -78,13 +78,12 @@ class _DetailPageState extends State<DetailPage> {
                       color: Colors.transparent,
                     ),
                     Positioned(
-                      top: 75.0,
+                      top: 215.0,
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(100.0),
-                            topRight: Radius.circular(100.0),
-                          ),
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50)),
                           color: Colors.white,
                         ),
                         height: MediaQuery.of(context).size.height - 120.0,
@@ -141,17 +140,18 @@ class _DetailPageState extends State<DetailPage> {
                       child: Text(
                         widget.shoesName,
                         style: TextStyle(
-                            fontFamily: "AD",
-                            fontSize: 37,
-                            color: Colors.black),
+                          fontFamily: "AD",
+                          fontSize: 37,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                     Positioned(
-                      top: 230,
-                      left: 20,
-                      right: 20,
+                      top: 228,
+                      left: 50,
+                      right: 50,
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
+                        width: MediaQuery.of(context).size.width * 0.4,
                         height: 1,
                         color: Colors.grey[200],
                       ),

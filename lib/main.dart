@@ -32,8 +32,8 @@ class _MyAppState extends State<MyApp> {
               FavouritePage(),
               Center(
                   child: Text(
-                "19000",
-                style: TextStyle(fontSize: 30, fontFamily: "FL"),
+                "lalalalla",
+                style: TextStyle(fontFamily: "NHL", fontSize: 20),
               )),
               Center(
                 child: ProfilePage(),

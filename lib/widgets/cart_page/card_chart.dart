@@ -14,20 +14,20 @@ class _CardChartState extends State<CardChart> {
       children: <Widget>[
         Center(
           child: Container(
-            margin: EdgeInsets.only(bottom: 20),
+            margin: EdgeInsets.only(bottom: 70),
             width: MediaQuery.of(context).size.width * .905,
             height: 110,
             decoration: BoxDecoration(
-                color: Colors.black45,
+                color: Color(0X525252522),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.fromLTRB(100, 23, 20, 10),
+                  margin: EdgeInsets.fromLTRB(100, 35, 20, 10),
                   height: 100,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,28 +38,30 @@ class _CardChartState extends State<CardChart> {
                             fontSize: 15,
                             fontFamily: "D",
                             fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       SizedBox(
-                        height: 35,
+                        height: 25,
                       ),
                       Text(
                         "Harga",
                         style: TextStyle(
-                            fontFamily: "F", fontSize: 17, color: Colors.white),
+                            fontFamily: "F", fontSize: 17, color: Colors.black),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                    width: 30,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.only(topLeft: Radius.circular(5)),
-                        color: Colors.black.withOpacity(.7)),
-                    child: CustomIcon.remove),
+                  width: 30,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  height: 30,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          bottomLeft: Radius.circular(5)),
+                      color: Colors.black.withOpacity(.7)),
+                  child: CustomIcon.remove,
+                ),
               ],
             ),
           ),
@@ -101,6 +103,46 @@ class _CardChartState extends State<CardChart> {
             image: AssetImage("assets/images/ozwbl.png"),
           ),
         ),
+        Positioned(
+          top: 110,
+          right: 18.5,
+          child: Container(
+            width: 290,
+            height: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(1),
+                bottomLeft: Radius.circular(5),
+                bottomRight: Radius.circular(5),
+              ),
+              color: Color(0x73707073),
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: DropdownButton<String>(
+                hint: Text(
+                  sizeValue,
+                  style: TextStyle(
+                    fontFamily: "F",
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                ),
+                items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                  return new DropdownMenuItem<String>(
+                    value: value,
+                    child: new Text(value),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    sizeValue = newValue;
+                  });
+                },
+              ),
+            ),
+          ),
+        )
       ],
     );
   }

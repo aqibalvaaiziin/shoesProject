@@ -26,8 +26,20 @@ class _ChartPageState extends State<ChartPage> {
                   width: 50,
                   child: Column(
                     children: <Widget>[
-                      Text("06",style: TextStyle(fontFamily: "FL",fontSize: 23,color: Colors.white),),
-                      Text("Barang",style: TextStyle(fontFamily: "FL",fontSize: 23,color: Colors.white),),
+                      Text(
+                        "06",
+                        style: TextStyle(
+                            fontFamily: "FL",
+                            fontSize: 23,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        "Barang",
+                        style: TextStyle(
+                            fontFamily: "FL",
+                            fontSize: 23,
+                            color: Colors.white),
+                      ),
                     ],
                   ),
                 ),
@@ -37,7 +49,16 @@ class _ChartPageState extends State<ChartPage> {
                   color: Colors.black45,
                   margin: EdgeInsets.symmetric(horizontal: 5),
                 ),
-                Container(child: Text("Rp. 20000000",style: TextStyle(fontFamily: "D",fontWeight: FontWeight.bold,fontSize: 23,color: Colors.white),),)
+                Container(
+                  child: Text(
+                    "Rp. 20000000",
+                    style: TextStyle(
+                        fontFamily: "D",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23,
+                        color: Colors.white),
+                  ),
+                )
               ],
             ),
           ),
