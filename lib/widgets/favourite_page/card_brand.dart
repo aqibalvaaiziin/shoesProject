@@ -8,7 +8,7 @@ class CardBrand extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       margin: EdgeInsets.symmetric(vertical: 5),
       child: Card(
-        elevation: 7,
+        elevation: 5,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.9,
           child: Row(
