@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class PictureProfile extends StatefulWidget {
@@ -7,7 +6,6 @@ class PictureProfile extends StatefulWidget {
 }
 
 class _PictureProfileState extends State<PictureProfile> {
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,8 +19,7 @@ class _PictureProfileState extends State<PictureProfile> {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image:
-                    AssetImage("assets/images/user.png")
+                image: AssetImage("assets/images/user.png"),
               ),
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/favourite_page.dart';
+import 'package:shoes/pages/history_page.dart';
 import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/profile.dart';
 
@@ -30,11 +31,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               HomePage(),
               FavouritePage(),
-              Center(
-                  child: Text(
-                "lalalalla",
-                style: TextStyle(fontFamily: "NHL", fontSize: 20),
-              )),
+              HistoryPage(),
               Center(
                 child: ProfilePage(),
               ),

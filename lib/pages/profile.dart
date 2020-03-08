@@ -14,7 +14,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFf4f6fb),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
