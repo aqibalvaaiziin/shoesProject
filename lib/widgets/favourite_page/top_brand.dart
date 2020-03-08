@@ -1,39 +1,61 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class TwoShoes extends StatelessWidget {
+  String image;
+  TwoShoes(this.image);
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 170,
-      height: 130,
+      width: 180,
+      height: 195,
       child: Stack(
         children: <Widget>[
           Positioned(
-            top: 83,
+            top: 115,
             left: 5,
             child: Container(
-              width: 125,
-              height: 35,
+              width: 150,
+              height: 45,
               decoration: BoxDecoration(
                 boxShadow: [
-                  BoxShadow(blurRadius: 20, color: Colors.grey),
+                  BoxShadow(
+                      blurRadius: 15,
+                      color: Color(0xb1858381).withOpacity(0.5)),
                 ],
               ),
             ),
           ),
           Positioned(
-            child: Image(
-              width: 130,
-              height: 130,
-              image: AssetImage("assets/images/ozwmcn.png"),
+            top: 5,
+            left: 5,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child: Transform.rotate(
+                angle: -math.pi / 14,
+                child: Image(
+                  width: 160,
+                  height: 160,
+                  image: AssetImage(image),
+                ),
+              ),
             ),
           ),
           Positioned(
-            top: 1,
-            child: Image(
-              width: 150,
-              height: 150,
-              image: AssetImage("assets/images/ozwmcn.png"),
+            top: 30,
+            left: 0,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child: Transform.rotate(
+                angle: -math.pi / 15,
+                child: Image(
+                  width: 170,
+                  height: 170,
+                  image: AssetImage(image),
+                ),
+              ),
             ),
           ),
         ],

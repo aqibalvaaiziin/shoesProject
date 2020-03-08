@@ -7,7 +7,7 @@ class CardChart extends StatefulWidget {
 }
 
 class _CardChartState extends State<CardChart> {
-  String sizeValue = "Ukuran";
+  String sizeValue = "Jumlah";
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -33,10 +33,10 @@ class _CardChartState extends State<CardChart> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Nama Sepatu Nama SepatuNama Sepatu",
+                        "Nama Sepatu Nama SepatuNama ",
                         style: TextStyle(
                             fontSize: 15,
-                            fontFamily: "D",
+                            fontFamily: "D", 
                             fontWeight: FontWeight.w600,
                             color: Colors.black),
                       ),
@@ -100,7 +100,7 @@ class _CardChartState extends State<CardChart> {
           child: Image(
             width: 95,
             height: 95,
-            image: AssetImage("assets/images/ozwbl.png"),
+            image: AssetImage("assets/images/ozwmcn.png"),
           ),
         ),
         Positioned(

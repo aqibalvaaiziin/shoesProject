@@ -17,14 +17,28 @@ class FavouritePage extends StatelessWidget {
             ),
           ),
         ),
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Colors.white,
       ),
       body: ListView(
         children: <Widget>[
-          SizedBox(height: 10,),
-          CardBrand(),
-          CardBrand(),
-          CardBrand(),
+          SizedBox(
+            height: 10,
+          ),
+          CardBrand(
+            "Adidas Nice Type",
+            "This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product",
+            "assets/images/ozwp.png",
+          ),
+          CardBrand(
+            "Adidas Nice Type",
+            "This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product",
+            "assets/images/ozwmcn.png",
+          ),
+          CardBrand(
+            "Adidas Nice Type",
+            "This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best productThis is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product",
+            "assets/images/ozwb.png",
+          ),
         ],
       ),
     );

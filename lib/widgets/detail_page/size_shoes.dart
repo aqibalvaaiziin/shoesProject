@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SizeShoes extends StatelessWidget {
-  String size;
-  bool isSelected;
+  final String size;
+  final bool isSelected;
   SizeShoes(this.size, this.isSelected);
   @override
   Widget build(BuildContext context) {
