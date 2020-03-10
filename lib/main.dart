@@ -4,14 +4,22 @@ import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/favourite_page.dart';
 import 'package:shoes/pages/history_page.dart';
 import 'package:shoes/pages/home_page.dart';
+import 'package:shoes/pages/login_page.dart';
 import 'package:shoes/pages/profile.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(MyApp());
-  });
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (_) {
+      runApp(
+        MaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/',
+          routes: {'/': (context) => LoginPage()},
+        ),
+      );
+    },
+  );
 }
 
 class MyApp extends StatefulWidget {
