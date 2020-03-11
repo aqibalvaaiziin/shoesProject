@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/widgets/cart_page/card_chart.dart';
+import 'package:shoes/widgets/cart_page/card_cart.dart';
 
-class ChartPage extends StatefulWidget {
+class CartPage extends StatefulWidget {
   @override
-  _ChartPageState createState() => _ChartPageState();
+  _CartPageState createState() => _CartPageState();
 }
 
-class _ChartPageState extends State<ChartPage> {
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,12 +74,11 @@ class _ChartPageState extends State<ChartPage> {
                 SizedBox(
                   height: 20,
                 ),
-                CardChart(),
-                CardChart(),
-                CardChart(),
-                CardChart(),
-                CardChart(),
-                CardChart(),
+                CardCart("assets/images/ozwb.png", "Adidas Blue Accent", 2000000),
+                CardCart("assets/images/ozwbl.png", "Adidas Blue", 1000000),
+                CardCart("assets/images/ozwp.png", "Adidas Pink", 3000000),
+                CardCart("assets/images/ozwmcn.png", "Adidas Tiger", 1000000),
+                CardCart("assets/images/ozwpr.png", "Adidas BlackPink", 200000),
               ],
             )
           ],

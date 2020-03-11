@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/widgets/detail_page/size_shoes.dart';
 
-import 'chart_page.dart';
+import 'cart_page.dart';
 
 class DetailPage extends StatefulWidget {
   final shoesImage;
@@ -25,7 +25,7 @@ class _DetailPageState extends State<DetailPage> {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => ChartPage(),
+              builder: (context) => CartPage(),
             ),
           );
         },
@@ -38,7 +38,7 @@ class _DetailPageState extends State<DetailPage> {
           ),
           child: Center(
             child: Text(
-              "Jumlah Item yang dibeli : 6",
+              "Jumlah Item yang dibeli : 5",
               style: TextStyle(
                   fontSize: 18,
                   fontFamily: "D",

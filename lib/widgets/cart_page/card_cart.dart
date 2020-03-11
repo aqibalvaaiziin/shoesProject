@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 
-class CardChart extends StatefulWidget {
+class CardCart extends StatefulWidget {
+  final String name;
+  final String image;
+  final int price;
+
+  CardCart(this.image,this.name, this.price);
   @override
-  _CardChartState createState() => _CardChartState();
+  _CardCartState createState() => _CardCartState(image,name,price);
+
 }
 
-class _CardChartState extends State<CardChart> {
+class _CardCartState extends State<CardCart> {
+  String name,image;
+  int price;
+  _CardCartState(this.image,this.name,this.price);
   String sizeValue = "Jumlah";
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class _CardChartState extends State<CardChart> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Nama Sepatu Nama SepatuNama ",
+                        name,
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: "D", 
@@ -44,7 +53,7 @@ class _CardChartState extends State<CardChart> {
                         height: 25,
                       ),
                       Text(
-                        "Harga",
+                        "Rp. "+price.toString(),
                         style: TextStyle(
                             fontFamily: "F", fontSize: 17, color: Colors.black),
                       ),
@@ -100,7 +109,7 @@ class _CardChartState extends State<CardChart> {
           child: Image(
             width: 95,
             height: 95,
-            image: AssetImage("assets/images/ozwmcn.png"),
+            image: AssetImage(image),
           ),
         ),
         Positioned(

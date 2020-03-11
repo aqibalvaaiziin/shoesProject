@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
-import 'package:shoes/pages/chart_page.dart';
+import 'package:shoes/pages/cart_page.dart';
 import 'package:shoes/widgets/main_page/product_card.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _MainPageState extends State<MainPage> {
           print("object");
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => ChartPage(),
+              builder: (context) => CartPage(),
             ),
           );
         },
@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
           ),
           child: Center(
             child: Text(
-              "Jumlah Item yang dibeli : 4",
+              "Jumlah Item yang dibeli : 5",
               style: TextStyle(
                   fontSize: 18,
                   fontFamily: "D",
