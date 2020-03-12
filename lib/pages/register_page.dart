@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/main.dart';
-import 'package:shoes/pages/register_page.dart';
-import 'package:shoes/widgets/login_page/clipperLogin.dart';
+import 'package:shoes/pages/login_page.dart';
+import 'package:shoes/widgets/register_page/clipper_reg.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             ClipPath(
-              clipper: ClipperBackground(),
+              clipper: ClipperRegister(),
               child: Container(
                 width: double.infinity,
-                height: 565,
+                height: 505,
                 child: Image.asset(
-                  "assets/images/bglogin.jpg",
+                  "assets/images/bgreg.jpg",
                   fit: BoxFit.cover,
                   width: 500,
-                  height: 570,
+                  height: 500,
                 ),
               ),
             ),
             Transform.translate(
-              offset: Offset(100, -80),
+              offset: Offset(-115, -65),
               child: Text(
-                "Login",
+                "Register",
                 style: TextStyle(
                   fontFamily: "F",
                   fontSize: 30,
@@ -35,9 +33,9 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Transform.translate(
-              offset: Offset(0, -60),
+              offset: Offset(0, -50),
               child: Container(
-                height: 250,
+                height: 420,
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                 decoration: BoxDecoration(
@@ -61,6 +59,18 @@ class LoginPage extends StatelessWidget {
                     TextField(
                       decoration: InputDecoration(
                           icon: Icon(
+                            Icons.email,
+                            color: Colors.grey,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          labelText: "Email : ",
+                          labelStyle: TextStyle(color: Colors.grey)),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          icon: Icon(
                             Icons.vpn_key,
                             color: Colors.grey,
                           ),
@@ -70,10 +80,38 @@ class LoginPage extends StatelessWidget {
                           labelText: "Password : ",
                           labelStyle: TextStyle(color: Colors.grey)),
                     ),
+                    TextField(
+                      decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.location_on,
+                            color: Colors.grey,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          labelText: "Alamat : ",
+                          labelStyle: TextStyle(color: Colors.grey)),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.phone,
+                            color: Colors.grey,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          labelText: "No Telephone : ",
+                          labelStyle: TextStyle(color: Colors.grey)),
+                    ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyApp()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        );
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: 30),
@@ -91,7 +129,7 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30)),
                         child: Center(
                           child: Text(
-                            "Login",
+                            "Daftar",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: "F",
@@ -104,11 +142,11 @@ class LoginPage extends StatelessWidget {
                       height: 15,
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(90, 0, 90, 0),
+                      padding: EdgeInsets.fromLTRB(75, 0, 70, 0),
                       child: Row(
                         children: <Widget>[
                           Text(
-                            "Belum memiliki akun ?",
+                            "Sudah memiliki akun ?",
                             style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.black,
@@ -119,17 +157,16 @@ class LoginPage extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              print("lalala");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => RegisterPage(),
+                                  builder: (context) => LoginPage(),
                                 ),
                               );
                             },
                             child: Container(
                               child: Text(
-                                "Daftar ?",
+                                "Kembali Login ?",
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blueAccent,
