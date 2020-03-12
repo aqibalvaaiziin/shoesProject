@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/favourite_page.dart';
 import 'package:shoes/pages/history_page.dart';
@@ -11,15 +12,35 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
-      runApp(
-        MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
-          routes: {'/': (context) => LoginPage()},
-        ),
-      );
+      runApp(AppRun());
     },
   );
+}
+
+String initialCode;
+
+void setCode() async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  pref.setString("initCode", "login");
+}
+
+Future<String> getCode() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  return preferences.getString("initCode") ?? null;
+}
+
+class AppRun extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: initialCode == "" || initialCode == null ? '/home' : '/login',
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/home': (context) => MyApp(),
+      },
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {
