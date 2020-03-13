@@ -7,6 +7,7 @@ import 'package:shoes/pages/history_page.dart';
 import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/login_page.dart';
 import 'package:shoes/pages/profile.dart';
+import 'package:shoes/pages/retail_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,8 @@ class AppRun extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: initialCode == "" || initialCode == null ? '/home' : '/login',
+      initialRoute:
+          initialCode == "" || initialCode == null ? '/home' : '/login',
       routes: {
         '/login': (context) => LoginPage(),
         '/home': (context) => MyApp(),
@@ -60,7 +62,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               HomePage(),
               FavouritePage(),
-              HistoryPage(),
+              RetailPage(),
               Center(
                 child: ProfilePage(),
               ),
