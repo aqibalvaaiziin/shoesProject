@@ -13,18 +13,20 @@ class CardBrand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width ,
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Card(
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 2),
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                blurRadius: 13.5,
-                color: Colors.grey,
-                offset: Offset(0, 5),
+                blurRadius: 10.5,
+                spreadRadius: 2,
+                color: Colors.grey[300],
+                offset: Offset(0, 10),
               ),
             ],
           ),

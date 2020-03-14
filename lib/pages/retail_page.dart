@@ -106,7 +106,7 @@ class _RetailPageState extends State<RetailPage> {
               itemCount: lala.length,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.fromLTRB(25, 0, 25, 20),
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: 80,
