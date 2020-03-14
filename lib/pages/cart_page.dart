@@ -118,7 +118,19 @@ class _CartPageState extends State<CartPage> {
                 SizedBox(
                   height: 20,
                 ),
-                CardCart(lala[index]['image'],lala[index]['name'],lala[index]['price']),
+                Dismissible(
+                  direction: DismissDirection.startToEnd,
+                  resizeDuration: Duration(milliseconds: 200),
+                  key: ObjectKey(lala[index]),
+                  onDismissed: (direction) {
+                    lala.remove(lala[index]);
+                  },
+                  child: CardCart(
+                    lala[index]['image'],
+                    lala[index]['name'],
+                    lala[index]['price'],
+                  ),
+                ),
               ],
             );
           },

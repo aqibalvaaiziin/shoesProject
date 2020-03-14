@@ -16,7 +16,7 @@ class _CardCartState extends State<CardCart> {
   String name,image;
   int price;
   _CardCartState(this.image,this.name,this.price);
-  String sizeValue = "Jumlah";
+  String qty = "Jumlah";
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -130,7 +130,7 @@ class _CardCartState extends State<CardCart> {
               padding: EdgeInsets.symmetric(horizontal: 25),
               child: DropdownButton<String>(
                 hint: Text(
-                  sizeValue,
+                  qty,
                   style: TextStyle(
                     fontFamily: "F",
                     fontWeight: FontWeight.normal,
@@ -145,7 +145,7 @@ class _CardCartState extends State<CardCart> {
                 }).toList(),
                 onChanged: (newValue) {
                   setState(() {
-                    sizeValue = newValue;
+                    qty = newValue;
                   });
                 },
               ),
