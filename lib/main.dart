@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/favourite_page.dart';
-import 'package:shoes/pages/history_page.dart';
 import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/login_page.dart';
 import 'package:shoes/pages/profile.dart';
