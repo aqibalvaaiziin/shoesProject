@@ -84,16 +84,20 @@ class _RetailPageState extends State<RetailPage> {
                 color: Colors.white,
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey[200],
+                      offset: Offset(0, 8),
+                      blurRadius: 10),
+                ],
               ),
               child: TextField(
                 controller: search,
-                onChanged: (value){
-                  
-                },
+                onChanged: (value) {},
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     suffixIcon: CustomIcon.search,
-                    prefixText: "Cari Retail : "),
+                    hintText: "Cari Retail : "),
               ),
             ),
           ),
@@ -109,6 +113,13 @@ class _RetailPageState extends State<RetailPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey[300],
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                          offset: Offset(5, 8)),
+                    ],
                   ),
                   child: Row(
                     children: <Widget>[
@@ -137,17 +148,14 @@ class _RetailPageState extends State<RetailPage> {
                                   fontFamily: "FL",
                                   fontWeight: FontWeight.w600),
                             ),
-                            RichText(
-                              overflow: TextOverflow.clip,
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontFamily: "FL",
-                                  fontSize: 13,
-                                  color: Colors.grey,
-                                ),
-                                text: '${lala[index]['location']}',
+                            Text(
+                              '${lala[index]['location']}',
+                              style: TextStyle(
+                                fontFamily: "FL",
+                                fontSize: 13,
+                                color: Colors.grey,
                               ),
-                            ),
+                            )
                           ],
                         ),
                       )

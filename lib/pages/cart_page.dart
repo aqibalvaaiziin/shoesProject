@@ -7,6 +7,49 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  var lala = [
+    {
+      "image": "assets/images/ozwb.png",
+      "name": "Adidas Blue Accent",
+      "price": 300000
+    },
+    {
+      "image": "assets/images/ozwbl.png",
+      "name": "Adidas Black Accent",
+      "price": 500000
+    },
+    {
+      "image": "assets/images/ozwmcn.png",
+      "name": "Adidas Blue Accent",
+      "price": 300000
+    },
+    {
+      "image": "assets/images/ozwp.png",
+      "name": "Adidas pink Accent",
+      "price": 300000
+    },
+    {
+      "image": "assets/images/ozwpr.png",
+      "name": "Adidas Blue pink Accent",
+      "price": 300000
+    },
+    {
+      "image": "assets/images/ozwb.png",
+      "name": "Adidas Blue Accent",
+      "price": 300000
+    },
+    {
+      "image": "assets/images/ozwb.png",
+      "name": "Adidas Blue Accent",
+      "price": 300000
+    },
+    {
+      "image": "assets/images/ozwb.png",
+      "name": "Adidas Blue Accent",
+      "price": 300000
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,22 +109,19 @@ class _CartPageState extends State<CartPage> {
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
-        child: ListView(
-          children: <Widget>[
-            Column(
+        child: ListView.builder(
+          itemCount: lala.length,
+          itemBuilder: (context, index) {
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(
                   height: 20,
                 ),
-                CardCart("assets/images/ozwb.png", "Adidas Blue Accent", 2000000),
-                CardCart("assets/images/ozwbl.png", "Adidas Blue", 1000000),
-                CardCart("assets/images/ozwp.png", "Adidas Pink", 3000000),
-                CardCart("assets/images/ozwmcn.png", "Adidas Tiger", 1000000),
-                CardCart("assets/images/ozwpr.png", "Adidas BlackPink", 200000),
+                CardCart(lala[index]['image'],lala[index]['name'],lala[index]['price']),
               ],
-            )
-          ],
+            );
+          },
         ),
       ),
     );
