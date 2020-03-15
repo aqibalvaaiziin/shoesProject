@@ -9,6 +9,38 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  var lala = [
+    {
+      "image": "assets/images/ozwb.png",
+      "name": "Adidas Biru",
+      "price": 2100000,
+      "isFav": true
+    },
+    {
+      "image": "assets/images/ozwbl.png",
+      "name": "Adidas Hitam",
+      "price": 2300000,
+      "isFav": false
+    },
+    {
+      "image": "assets/images/ozwp.png",
+      "name": "Adidas Pink",
+      "price": 500000,
+      "isFav": true
+    },
+    {
+      "image": "assets/images/ozwpr.png",
+      "name": "Adidas Black Pink",
+      "price": 3300000,
+      "isFav": false
+    },
+    {
+      "image": "assets/images/ozwmcn.png",
+      "name": "Adidas Macan",
+      "price": 1700000,
+      "isFav": true
+    },
+  ];
   TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -61,49 +93,43 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       backgroundColor: Color(0xFFf4f6fb),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 15),
-                child: Text(
-                  "234 Result",
-                  style: TextStyle(fontSize: 20, fontFamily: "FL"),
+      body: ListView(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 15),
+                  child: Text(
+                    "234 Result",
+                    style: TextStyle(fontSize: 20, fontFamily: "FL"),
+                  ),
                 ),
               ),
-            ),
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 10),
-                width: MediaQuery.of(context).size.width - 60,
-                height: 2,
-                color: Colors.grey[300],
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  width: MediaQuery.of(context).size.width - 60,
+                  height: 2,
+                  color: Colors.grey[300],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Wrap(
-                children: <Widget>[
-                  CardProducts(
-                      "assets/images/ozwb.png", "Adidas Bagus", 30000, true),
-                  CardProducts(
-                      "assets/images/ozwbl.png", "Adidas Bagus", 30000, false),
-                  CardProducts(
-                      "assets/images/ozwmcn.png", "Adidas Bagus", 30000, false),
-                  CardProducts(
-                      "assets/images/ozwp.png", "Adidas Bagus", 30000, true),
-                  CardProducts(
-                      "assets/images/ozwpr.png", "Adidas Bagus", 30000, true),
-                ],
+              SizedBox(
+                height: 20,
               ),
-            ),
-          ],
-        ),
+              Center(
+                child: Wrap(
+                  children: lala.map((data) {
+                    return CardProducts(data['image'], data['name'],
+                        data['price'], data['isFav']);
+                  }).toList(),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

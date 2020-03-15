@@ -7,7 +7,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  TextEditingController controller1 = TextEditingController(text: "Arek Edan");
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,7 +29,7 @@ class _ProfileState extends State<Profile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                "Arek Edan",
+                "Moch Aqib Alvaaiziin",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
               CustomIcon.pencil
@@ -78,7 +77,7 @@ class _ProfileState extends State<Profile> {
                       width: 30,
                     ),
                     Text(
-                      "ArekEdan@gmail.com",
+                      "aqibalvaaiziin@gmail.com",
                       style: TextStyle(fontWeight: FontWeight.w300),
                     )
                   ],

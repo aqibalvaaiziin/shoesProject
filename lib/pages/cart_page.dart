@@ -50,6 +50,16 @@ class _CartPageState extends State<CartPage> {
     },
   ];
 
+  int countTotal() {
+    int total = 0;
+
+    for (var i = 0; i < lala.length; i++) {
+      total += lala[i]['price'];
+    }
+    print(total);
+    return total;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +80,7 @@ class _CartPageState extends State<CartPage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        "06",
+                        lala.length.toString(),
                         style: TextStyle(
                             fontFamily: "FL",
                             fontSize: 23,
@@ -94,7 +104,7 @@ class _CartPageState extends State<CartPage> {
                 ),
                 Container(
                   child: Text(
-                    "Rp. 20000000",
+                    "Rp. " + countTotal().toString(),
                     style: TextStyle(
                         fontFamily: "D",
                         fontWeight: FontWeight.bold,
@@ -124,6 +134,9 @@ class _CartPageState extends State<CartPage> {
                   key: ObjectKey(lala[index]),
                   onDismissed: (direction) {
                     lala.remove(lala[index]);
+                    setState(() {
+                      countTotal();
+                    });
                   },
                   child: CardCart(
                     lala[index]['image'],

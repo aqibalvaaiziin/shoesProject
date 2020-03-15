@@ -5,7 +5,7 @@ import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/favourite_page.dart';
 import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/login_page.dart';
-import 'package:shoes/pages/profile.dart';
+import 'package:shoes/pages/profile_page.dart';
 import 'package:shoes/pages/retail_page.dart';
 
 void main() {

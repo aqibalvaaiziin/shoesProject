@@ -105,7 +105,7 @@ class CardProducts extends StatelessWidget {
           ),
           Positioned(
               top: 35,
-              right: 15,
+              left: 140,
               child: !isFav ? CustomIcon.outlineHeart : CustomIcon.redHeart)
         ],
       ),

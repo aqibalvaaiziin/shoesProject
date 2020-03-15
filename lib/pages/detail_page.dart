@@ -136,14 +136,15 @@ class _DetailPageState extends State<DetailPage> {
                     Positioned(
                       left: 65,
                       right: 65,
-                      top: 180,
+                      top: 190,
                       child: Text(
                         widget.shoesName,
                         style: TextStyle(
                           fontFamily: "AD",
-                          fontSize: 37,
+                          fontSize: 28,
                           color: Colors.black,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Positioned(

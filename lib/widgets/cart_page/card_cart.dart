@@ -6,16 +6,15 @@ class CardCart extends StatefulWidget {
   final String image;
   final int price;
 
-  CardCart(this.image,this.name, this.price);
+  CardCart(this.image, this.name, this.price);
   @override
-  _CardCartState createState() => _CardCartState(image,name,price);
-
+  _CardCartState createState() => _CardCartState(image, name, price);
 }
 
 class _CardCartState extends State<CardCart> {
-  String name,image;
+  String name, image;
   int price;
-  _CardCartState(this.image,this.name,this.price);
+  _CardCartState(this.image, this.name, this.price);
   String qty = "Jumlah";
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class _CardCartState extends State<CardCart> {
                         name,
                         style: TextStyle(
                             fontSize: 15,
-                            fontFamily: "D", 
+                            fontFamily: "D",
                             fontWeight: FontWeight.w600,
                             color: Colors.black),
                       ),
@@ -53,7 +52,7 @@ class _CardCartState extends State<CardCart> {
                         height: 25,
                       ),
                       Text(
-                        "Rp. "+price.toString(),
+                        "Rp. " + price.toString(),
                         style: TextStyle(
                             fontFamily: "F", fontSize: 17, color: Colors.black),
                       ),
@@ -128,7 +127,7 @@ class _CardCartState extends State<CardCart> {
             ),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 25),
-              child: DropdownButton<String>(
+              child: DropdownButton<int>(
                 hint: Text(
                   qty,
                   style: TextStyle(
@@ -137,15 +136,15 @@ class _CardCartState extends State<CardCart> {
                     fontSize: 14,
                   ),
                 ),
-                items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                  return new DropdownMenuItem<String>(
+                items: <int>[1, 2, 3, 4, 5].map((int value) {
+                  return new DropdownMenuItem<int>(
                     value: value,
-                    child: new Text(value),
+                    child: new Text(value.toString()),
                   );
                 }).toList(),
                 onChanged: (newValue) {
                   setState(() {
-                    qty = newValue;
+                    qty = newValue.toString();
                   });
                 },
               ),
