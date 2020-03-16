@@ -56,7 +56,6 @@ class _CartPageState extends State<CartPage> {
     for (var i = 0; i < lala.length; i++) {
       total += lala[i]['price'];
     }
-    print(total);
     return total;
   }
 

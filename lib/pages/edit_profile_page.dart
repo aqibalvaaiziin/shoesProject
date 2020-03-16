@@ -196,9 +196,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       onTap: () {
                         return Alert(
                             context: context,
+                            style: AlertStyle(
+                                backgroundColor: Colors.grey[200],
+                                animationDuration: Duration(milliseconds: 600),
+                                animationType: AnimationType.grow,
+                                titleStyle: TextStyle(
+                                  fontSize: 23,
+                                  fontFamily: "FL",
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                isCloseButton: false,
+                                overlayColor: Colors.black87),
                             title: "Pilih Salah Satu",
                             buttons: [
                               DialogButton(
+                                  color: Color(0xaa18c5f5),
                                   child: Text(
                                     "Galeri",
                                     style: TextStyle(
@@ -209,6 +221,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     open_gallery();
                                   }),
                               DialogButton(
+                                  color: Color(0xaa18c5f5),
                                   child: Text(
                                     "Kamera",
                                     style: TextStyle(
