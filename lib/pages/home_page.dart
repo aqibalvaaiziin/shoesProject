@@ -33,18 +33,6 @@ class HomePage extends StatelessWidget {
               image: AssetImage("assets/images/super.jpg"),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => MainPage(),
-                ),
-              );
-            },
-            child: Image(
-              image: AssetImage("assets/images/predator.jpg"),
-            ),
-          ),
           SizedBox(
             height: 20,
           ),

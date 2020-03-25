@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shoes/factory/register_factory.dart';
+import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/login_page.dart';
 import 'package:shoes/widgets/register_page/clipper_reg.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController alamat = TextEditingController();
+  TextEditingController telp = TextEditingController();
+  RegisterFactory registerFactory = null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +59,7 @@ class RegisterPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: name,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.person,
@@ -57,6 +72,7 @@ class RegisterPage extends StatelessWidget {
                           labelStyle: TextStyle(color: Colors.grey)),
                     ),
                     TextField(
+                      controller: email,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.email,
@@ -69,6 +85,7 @@ class RegisterPage extends StatelessWidget {
                           labelStyle: TextStyle(color: Colors.grey)),
                     ),
                     TextField(
+                      controller: password,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.vpn_key,
@@ -81,6 +98,7 @@ class RegisterPage extends StatelessWidget {
                           labelStyle: TextStyle(color: Colors.grey)),
                     ),
                     TextField(
+                      controller: alamat,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.location_on,
@@ -93,6 +111,7 @@ class RegisterPage extends StatelessWidget {
                           labelStyle: TextStyle(color: Colors.grey)),
                     ),
                     TextField(
+                      controller: telp,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.phone,
@@ -106,12 +125,71 @@ class RegisterPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
+                        RegisterFactory.createPostBody(name.text, email.text,
+                                password.text, alamat.text, telp.text)
+                            .then((value) {
+                          registerFactory = value;
+                          bool condition = (name.text != "" &&
+                              email.text != "" &&
+                              password.text != "" &&
+                              alamat.text != "" &&
+                              telp.text != "");
+                          if (condition) {
+                            Alert(
+                                content: CustomIcon.check,
+                                context: context,
+                                style: AlertStyle(
+                                    backgroundColor: Colors.grey[200],
+                                    animationDuration:
+                                        Duration(milliseconds: 600),
+                                    animationType: AnimationType.grow,
+                                    titleStyle: TextStyle(
+                                      fontSize: 23,
+                                      fontFamily: "D",
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    isCloseButton: false,
+                                    overlayColor: Colors.black87),
+                                title: "Register Berhasil Berhasil",
+                                buttons: [
+                                  DialogButton(
+                                      width: 150,
+                                      color: Color(0xaa18c5f5),
+                                      child: Text(
+                                        "Kembali ke halaman login ?",
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            fontFamily: "D",
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()));
+                                      }),
+                                ]).show();
+                          } else {
+                            Alert(
+                              context: context,
+                              content: CustomIcon.remove,
+                              style: AlertStyle(
+                                  backgroundColor: Colors.grey[200],
+                                  animationDuration:
+                                      Duration(milliseconds: 600),
+                                  animationType: AnimationType.grow,
+                                  titleStyle: TextStyle(
+                                    fontSize: 23,
+                                    fontFamily: "FL",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  isCloseButton: false,
+                                  overlayColor: Colors.black87),
+                              title: "Lengkapi data dengan benar !!",
+                            ).show();
+                          }
+                        });
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: 30),

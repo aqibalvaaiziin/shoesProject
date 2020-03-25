@@ -1,9 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shoes/factory/login_factory.dart';
+import 'package:shoes/icons/icon.dart';
 import 'package:shoes/main.dart';
 import 'package:shoes/pages/register_page.dart';
 import 'package:shoes/widgets/login_page/clipperLogin.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  LoginFactory loginFactory = null;
+
+  void setTokenCode(data) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("tokenCode", data);
+  }
+
+  Future<String> getTokenCode() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString("tokenCode") ?? null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +70,7 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: email,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.person,
@@ -55,10 +79,11 @@ class LoginPage extends StatelessWidget {
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey),
                           ),
-                          labelText: "Nama : ",
+                          labelText: "Email : ",
                           labelStyle: TextStyle(color: Colors.grey)),
                     ),
                     TextField(
+                      controller: password,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.vpn_key,
@@ -72,8 +97,67 @@ class LoginPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyApp()));
+                        LoginFactory.createPostBody(email.text, password.text)
+                            .then((value) {
+                          loginFactory = value;
+                          if (loginFactory.tokenType == "bearer") {
+                            setTokenCode(loginFactory.token);
+                            Alert(
+                                content: CustomIcon.check,
+                                context: context,
+                                style: AlertStyle(
+                                    backgroundColor: Colors.grey[200],
+                                    animationDuration:
+                                        Duration(milliseconds: 600),
+                                    animationType: AnimationType.grow,
+                                    titleStyle: TextStyle(
+                                      fontSize: 23,
+                                      fontFamily: "D",
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    isCloseButton: false,
+                                    overlayColor: Colors.black87),
+                                title: "Login Berhasil",
+                                buttons: [
+                                  DialogButton(
+                                      width: 150,
+                                      color: Color(0xaa18c5f5),
+                                      child: Text(
+                                        "Mulai Belanja ?",
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            fontFamily: "D",
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => MyApp()));
+                                      }),
+                                ]).show();
+                          } else {
+                            Alert(
+                              context: context,
+                              content: CustomIcon.remove,
+                              style: AlertStyle(
+                                  backgroundColor: Colors.grey[200],
+                                  animationDuration:
+                                      Duration(milliseconds: 600),
+                                  animationType: AnimationType.grow,
+                                  titleStyle: TextStyle(
+                                    fontSize: 23,
+                                    fontFamily: "FL",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  isCloseButton: false,
+                                  overlayColor: Colors.black87),
+                              title: "Email atau password anda salah",
+                            ).show();
+                          }
+                        });
+
+                        setState(() {});
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: 30),

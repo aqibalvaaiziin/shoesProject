@@ -59,17 +59,7 @@ class _CardCartState extends State<CardCart> {
                     ],
                   ),
                 ),
-                Container(
-                  width: 30,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  height: 30,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          bottomLeft: Radius.circular(5)),
-                      color: Colors.black.withOpacity(.7)),
-                  child: CustomIcon.remove,
-                ),
+               
               ],
             ),
           ),

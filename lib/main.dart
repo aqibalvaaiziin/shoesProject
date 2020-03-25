@@ -35,7 +35,7 @@ class AppRun extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute:
-          initialCode == "" || initialCode == null ? '/home' : '/login',
+          initialCode == "" || initialCode == null ? '/login' : '/home',
       routes: {
         '/login': (context) => LoginPage(),
         '/home': (context) => MyApp(),

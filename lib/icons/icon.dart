@@ -58,14 +58,20 @@ class CustomIcon {
   );
 
   static const Icon remove = Icon(
-    FontAwesome.remove,
-    color: Colors.white,
-    size: 15,
+    FontAwesome.times_circle_o,
+    color: Colors.red,
+    size: 70,
   );
   static const Icon profileUser = Icon(FontAwesome.user_circle);
 
   static const Icon cart = Icon(
     FontAwesome.shopping_cart,
     size: 30,
+  );
+
+  static const Icon check = Icon(
+    FontAwesome.check_circle_o,
+    size: 70,
+    color: Colors.green,
   );
 }
