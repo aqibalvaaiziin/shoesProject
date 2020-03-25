@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/factory/retail_factory.dart';
 import 'package:shoes/icons/icon.dart';
 
 class RetailPage extends StatefulWidget {
@@ -8,53 +9,24 @@ class RetailPage extends StatefulWidget {
 
 class _RetailPageState extends State<RetailPage> {
   TextEditingController search = TextEditingController();
-  var lala = [
-    {
-      "city": "Malang",
-      "place": "Malang Town Square",
-      "location": "Jl. Veteran Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Surabaya",
-      "place": "Tanjungan Plaza",
-      "location": "Jl. Malangan Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Jakarta",
-      "place": "GI",
-      "location": "Jl. Surabaya Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Malang",
-      "place": "Malang Town Square",
-      "location": "Jl. Veteran Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Surabaya",
-      "place": "Tanjungan Plaza",
-      "location": "Jl. Malangan Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Jakarta",
-      "place": "GI",
-      "location": "Jl. Surabaya Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Malang",
-      "place": "Malang Town Square",
-      "location": "Jl. Veteran Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Surabaya",
-      "place": "Tanjungan Plaza",
-      "location": "Jl. Malangan Block 785 Jawa Timur Malang"
-    },
-    {
-      "city": "Jakarta",
-      "place": "GI",
-      "location": "Jl. Surabaya Block 785 Jawa Timur Malang"
-    }
-  ];
+  List<RetailFactory> result = new List();
+  List<RetailFactory> searchResult = new List();
+
+  void dataRetail() {
+    RetailFactory.getRetail().then((value) {
+      for (var i = 0; i < value.length; i++) {
+        setState(() {
+          result.add(value[i]);
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    dataRetail();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +34,14 @@ class _RetailPageState extends State<RetailPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(20, 60, 0, 10),
-            child: CustomIcon.back,
+          GestureDetector(
+            onTap: () {
+              print(result);
+            },
+            child: Container(
+              margin: EdgeInsets.fromLTRB(20, 60, 0, 10),
+              child: CustomIcon.back,
+            ),
           ),
           Container(
             child: Center(
@@ -93,7 +70,7 @@ class _RetailPageState extends State<RetailPage> {
               ),
               child: TextField(
                 controller: search,
-                onChanged: (value) {},
+                onChanged: onSearchTextChanged,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     suffixIcon: CustomIcon.search,
@@ -102,71 +79,154 @@ class _RetailPageState extends State<RetailPage> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: lala.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey[300],
-                          blurRadius: 8,
-                          spreadRadius: 2,
-                          offset: Offset(5, 8)),
-                    ],
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.store_mall_directory,
-                        size: 70,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            child: searchResult.length != 0 || search.text.isNotEmpty
+                ? ListView.builder(
+                    itemCount: searchResult.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey[300],
+                                blurRadius: 8,
+                                spreadRadius: 2,
+                                offset: Offset(5, 8)),
+                          ],
+                        ),
+                        child: Row(
                           children: <Widget>[
-                            Text(
-                              '${lala[index]['place']}',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontFamily: "D",
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Icon(
+                              Icons.store_mall_directory,
+                              size: 70,
                             ),
-                            Text(
-                              '${lala[index]['city']}',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "FL",
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              '${lala[index]['location']}',
-                              style: TextStyle(
-                                fontFamily: "FL",
-                                fontSize: 13,
-                                color: Colors.grey,
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    result[index].nama,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "D",
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    result[index].telp,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: "FL",
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    result[index].lokasi,
+                                    style: TextStyle(
+                                      fontFamily: "FL",
+                                      fontSize: 13,
+                                      color: Colors.grey,
+                                    ),
+                                  )
+                                ],
                               ),
                             )
                           ],
                         ),
-                      )
-                    ],
+                      );
+                    },
+                  )
+                : ListView.builder(
+                    itemCount: result.length,
+                    itemBuilder: (context, i) {                      
+                      return Container(
+                        margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey[300],
+                                blurRadius: 8,
+                                spreadRadius: 2,
+                                offset: Offset(5, 8)),
+                          ],
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.store_mall_directory,
+                              size: 70,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    result[i].nama,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "D",
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    result[i].telp,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: "FL",
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    result[i].lokasi,
+                                    style: TextStyle(
+                                      fontFamily: "FL",
+                                      fontSize: 13,
+                                      color: Colors.grey,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
     );
+  }
+
+  onSearchTextChanged(String text) async {
+    searchResult.clear();
+    if (text.isEmpty) {
+      setState(() {});
+      return;
+    }
+
+    result.forEach((data){
+      if (data.nama.toLowerCase().contains(text.toLowerCase()) ||
+          data.lokasi.toLowerCase().contains(text.toLowerCase())) {
+        searchResult.add(data);
+        print(data.nama.toLowerCase());
+      }
+    });
+
+    setState(() {});
   }
 }
