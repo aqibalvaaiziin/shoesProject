@@ -5,6 +5,7 @@ import 'package:shoes/factory/login_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/main.dart';
 import 'package:shoes/pages/register_page.dart';
+import 'package:shoes/preference/preferences.dart';
 import 'package:shoes/widgets/login_page/clipperLogin.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,16 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   LoginFactory loginFactory = null;
-
-  void setTokenCode(data) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("tokenCode", data);
-  }
-
-  Future<String> getTokenCode() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString("tokenCode") ?? null;
-  }
+  PreferencesData _data = new PreferencesData();
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +92,10 @@ class _LoginPageState extends State<LoginPage> {
                         LoginFactory.createPostBody(email.text, password.text)
                             .then((value) {
                           loginFactory = value;
-                          if (loginFactory.tokenType == "bearer") {
-                            setTokenCode(loginFactory.token);
+                          if (loginFactory.tokenType == "bearerHeader") {
+                            _data.setTokenCode(loginFactory.token);
+                            _data.setTokenType(loginFactory.tokenType);
+
                             Alert(
                                 content: CustomIcon.check,
                                 context: context,
@@ -156,7 +150,6 @@ class _LoginPageState extends State<LoginPage> {
                             ).show();
                           }
                         });
-
                         setState(() {});
                       },
                       child: Container(
@@ -203,7 +196,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              print("lalala");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

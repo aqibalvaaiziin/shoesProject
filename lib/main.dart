@@ -7,12 +7,19 @@ import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/login_page.dart';
 import 'package:shoes/pages/profile_page.dart';
 import 'package:shoes/pages/retail_page.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:shoes/redux/app_state.dart';
+import 'package:shoes/redux/reducer.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  final _initalState = AppState();
+  final Store<AppState> _store =
+      Store<AppState>(reducer, initialState: _initalState);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
-      runApp(AppRun());
+      runApp(AppRun(store: _store));
     },
   );
 }
@@ -30,16 +37,21 @@ Future<String> getCode() async {
 }
 
 class AppRun extends StatelessWidget {
+  final Store<AppState> store;
+  AppRun({this.store});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute:
-          initialCode == "" || initialCode == null ? '/home' : '/login',
-      routes: {
-        '/login': (context) => LoginPage(),
-        '/home': (context) => MyApp(),
-      },
+    return StoreProvider<AppState>(
+      store: store,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute:
+            initialCode == "" || initialCode == null ? '/login' : '/home',
+        routes: {
+          '/login': (context) => LoginPage(),
+          '/home': (context) => MyApp(),
+        },
+      ),
     );
   }
 }

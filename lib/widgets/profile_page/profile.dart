@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 
-class Profile extends StatefulWidget {
-  @override
-  _ProfileState createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
+class Profile extends StatelessWidget {
+  String name, email, address, phone;
+  Profile(String name, String email, String address, String phone) {
+    this.name = name;
+    this.email = email;
+    this.address = address;
+    this.phone = phone;
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +31,7 @@ class _ProfileState extends State<Profile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                "Moch Aqib Alvaaiziin",
+                name,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
               CustomIcon.pencil
@@ -77,7 +79,7 @@ class _ProfileState extends State<Profile> {
                       width: 30,
                     ),
                     Text(
-                      "aqibalvaaiziin@gmail.com",
+                      email,
                       style: TextStyle(fontWeight: FontWeight.w300),
                     )
                   ],
@@ -98,7 +100,7 @@ class _ProfileState extends State<Profile> {
                       width: 282,
                       margin: EdgeInsets.only(),
                       child: Text(
-                        "Malang Soekarno Hatta 17 Lowokwaru Jawa Timur",
+                        address,
                         style: TextStyle(fontWeight: FontWeight.w300),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -118,7 +120,7 @@ class _ProfileState extends State<Profile> {
                       width: 30,
                     ),
                     Text(
-                      "+62888399423",
+                      phone,
                       style: TextStyle(fontWeight: FontWeight.w300),
                     )
                   ],

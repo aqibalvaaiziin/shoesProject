@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class PictureProfile extends StatefulWidget {
-  @override
-  _PictureProfileState createState() => _PictureProfileState();
-}
-
-class _PictureProfileState extends State<PictureProfile> {
+class PictureProfile extends StatelessWidget {
+  String dataImage;
+  PictureProfile(String data) {
+    this.dataImage = data;
+  }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -19,7 +18,7 @@ class _PictureProfileState extends State<PictureProfile> {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/user.png"),
+                image: AssetImage(dataImage),
               ),
             ),
           ),
