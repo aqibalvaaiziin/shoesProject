@@ -5,11 +5,14 @@ import 'package:shoes/icons/icon.dart';
 import 'dart:io';
 
 class EditProfilePage extends StatefulWidget {
+  final idUser;
+  EditProfilePage({this.idUser});
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  _EditProfilePageState({idUser});
   File _image;
 
   void open_camera() async {

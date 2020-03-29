@@ -32,29 +32,19 @@ class ProfileFactory {
     );
   }
 
-  static String dataToken = "";
-  static String dataTokenType = "";
-
-  static void data() {
-    PreferencesData _data = PreferencesData();
-    _data.getTokenCode().then((value) {
-      dataToken = value;
-    });
-
-    _data.getTokenType().then((value) {
-      dataTokenType = value;
-    });
-  }
-
   static Future<ProfileFactory> setRequest() async {
-    data();
     String apiURL = "https://sepatu.gopla.xyz/user/profile/me";
+    PreferencesData _data = PreferencesData();
+    String token = await _data.getTokenCode();
+    String type = await _data.getTokenType();
     var apiResult = await http.get(
       apiURL,
-      headers: {HttpHeaders.authorizationHeader: "$dataTokenType $dataToken"},
+      headers: {HttpHeaders.authorizationHeader: "$type $token"},
     );
     var jsonObject = json.decode(apiResult.body);
-    print(jsonObject);
-    return ProfileFactory.getResponse(jsonObject);
+    var data = (jsonObject as Map<String, dynamic>)['data'];
+    // print(data);
+    return ProfileFactory.getResponse(data);
   }
+
 }

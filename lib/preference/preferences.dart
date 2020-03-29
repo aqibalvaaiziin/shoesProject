@@ -20,4 +20,14 @@ class PreferencesData {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString("tokenType") ?? null;
   }
+
+    void setIdUser(data) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("idUser", data);
+  }
+
+  Future<String> getIdUser() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString("idUser") ?? null;
+  }
 }
