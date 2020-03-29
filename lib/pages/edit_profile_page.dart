@@ -1,11 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shoes/factory/edit_profile_factory.dart';
 import 'package:shoes/icons/icon.dart';
+import 'package:shoes/main.dart';
 import 'dart:io';
+import 'package:image/image.dart' as ImageProcess;
+import 'package:shoes/preference/user_preferences.dart';
 
 class EditProfilePage extends StatefulWidget {
-  final idUser;
+  final int idUser;
   EditProfilePage({this.idUser});
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -14,6 +20,13 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   _EditProfilePageState({idUser});
   File _image;
+  TextEditingController nama = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController alamat = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController telp = TextEditingController();
+  String data;
+  UserPreferences _dataUser = UserPreferences();
 
   void open_camera() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -79,6 +92,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       child: Column(
                         children: <Widget>[
                           TextField(
+                            controller: nama,
                             decoration: InputDecoration(
                                 icon: Icon(
                                   Icons.person,
@@ -91,6 +105,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 labelStyle: TextStyle(color: Colors.grey)),
                           ),
                           TextField(
+                            controller: email,
                             decoration: InputDecoration(
                                 icon: Icon(
                                   Icons.email,
@@ -103,6 +118,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 labelStyle: TextStyle(color: Colors.grey)),
                           ),
                           TextField(
+                            controller: password,
+                            decoration: InputDecoration(
+                                icon: Icon(
+                                  Icons.vpn_key,
+                                  color: Colors.grey,
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                labelText: "Password : ",
+                                labelStyle: TextStyle(color: Colors.grey)),
+                          ),
+                          TextField(
+                            controller: alamat,
                             decoration: InputDecoration(
                                 icon: Icon(
                                   Icons.location_on,
@@ -115,6 +144,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 labelStyle: TextStyle(color: Colors.grey)),
                           ),
                           TextField(
+                            controller: telp,
                             decoration: InputDecoration(
                                 icon: Icon(
                                   Icons.phone,
@@ -124,18 +154,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   borderSide: BorderSide(color: Colors.grey),
                                 ),
                                 labelText: "No Telephone : ",
-                                labelStyle: TextStyle(color: Colors.grey)),
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                                icon: Icon(
-                                  Icons.list,
-                                  color: Colors.grey,
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                                labelText: "Deskripsi : ",
                                 labelStyle: TextStyle(color: Colors.grey)),
                           ),
                         ],
@@ -159,7 +177,67 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   color: Colors.transparent,
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(20),
-                                    onTap: () {},
+                                    onTap: () {
+                                      final _imageFile =
+                                          ImageProcess.decodeImage(
+                                        _image.readAsBytesSync(),
+                                      );
+                                      String base64Image = base64Encode(
+                                          ImageProcess.encodePng(_imageFile));
+                                      EditProfileFactory.setRequest(
+                                        widget.idUser,
+                                        nama.text,
+                                        email.text,
+                                        password.text,
+                                        alamat.text,
+                                        telp.text,
+                                        _image,
+                                      ).then((value) {
+                                        data = value;
+                                      });
+                                      _dataUser.setName(nama.text);
+                                      _dataUser.setEmail(email.text);
+                                      _dataUser.setPassword(password.text);
+                                      _dataUser.setAlamat(alamat.text);
+                                      _dataUser.setTelp(telp.text);
+                                      _dataUser.setFoto(base64Image);
+                                      Alert(
+                                          content: CustomIcon.check,
+                                          context: context,
+                                          style: AlertStyle(
+                                              backgroundColor: Colors.grey[200],
+                                              animationDuration:
+                                                  Duration(milliseconds: 600),
+                                              animationType: AnimationType.grow,
+                                              titleStyle: TextStyle(
+                                                fontSize: 23,
+                                                fontFamily: "D",
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              isCloseButton: false,
+                                              overlayColor: Colors.black87),
+                                          title: "Data berhasil di update",
+                                          buttons: [
+                                            DialogButton(
+                                                width: 150,
+                                                color: Color(0xaa18c5f5),
+                                                child: Text(
+                                                  "Kembali ke halaman profile ?",
+                                                  style: TextStyle(
+                                                      fontSize: 17,
+                                                      fontFamily: "D",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              MyApp()));
+                                                }),
+                                          ]).show();
+                                    },
                                     child: Text(
                                       "SIMPAN",
                                       style: TextStyle(

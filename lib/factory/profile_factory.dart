@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:shoes/preference/preferences.dart';
+import 'package:shoes/preference/user_preferences.dart';
 
 class ProfileFactory {
   String id;
@@ -34,7 +34,7 @@ class ProfileFactory {
 
   static Future<ProfileFactory> setRequest() async {
     String apiURL = "https://sepatu.gopla.xyz/user/profile/me";
-    PreferencesData _data = PreferencesData();
+    UserPreferences _data = UserPreferences();
     String token = await _data.getTokenCode();
     String type = await _data.getTokenType();
     var apiResult = await http.get(

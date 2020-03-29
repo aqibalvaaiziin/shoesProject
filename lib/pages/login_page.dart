@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/factory/login_factory.dart';
+import 'package:shoes/factory/profile_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/main.dart';
 import 'package:shoes/pages/register_page.dart';
-import 'package:shoes/preference/preferences.dart';
+import 'package:shoes/preference/user_preferences.dart';
 import 'package:shoes/widgets/login_page/clipperLogin.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,7 +17,23 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   LoginFactory loginFactory = null;
-  PreferencesData _data = new PreferencesData();
+  ProfileFactory dataProfile = ProfileFactory();
+  UserPreferences _data = new UserPreferences();
+
+  void setDataProfile() {
+    ProfileFactory.setRequest().then((value) {
+      dataProfile = value;
+      _data.setIdUser(dataProfile.id);
+      _data.setName(dataProfile.name);
+      _data.setEmail(dataProfile.email);
+      _data.setAlamat(dataProfile.alamat);
+      _data.setTelp(dataProfile.telp);
+      _data.setFoto(dataProfile.foto);
+      _data.getName().then((value) {
+        print(value);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (loginFactory.tokenType == "bearerHeader") {
                             _data.setTokenCode(loginFactory.token);
                             _data.setTokenType(loginFactory.tokenType);
-
+                            setDataProfile();
                             Alert(
                                 content: CustomIcon.check,
                                 context: context,
