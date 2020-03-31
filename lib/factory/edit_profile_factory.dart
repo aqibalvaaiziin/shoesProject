@@ -1,10 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
-
-import 'package:flutter/foundation.dart';
+import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:image/image.dart' as img;
+import 'package:shoes/preference/user_preferences.dart';
 
 class EditProfileFactory {
   static Future<String> setRequest(
@@ -18,22 +17,18 @@ class EditProfileFactory {
   ) async {
     try {
       var apiUrl = Uri.parse("https://sepatu.gopla.xyz/user/" + id.toString());
-      final fileName = path.basename(foto.path);
-      final bytes = await compute(compress, foto.readAsBytesSync());
+      var stream = new http.ByteStream(DelegatingStream.typed(foto.openRead()));
+      var length = await foto.length();
       var requestData = http.MultipartRequest('PUT', apiUrl)
         ..fields['nama'] = nama
         ..fields['email'] = email
         ..fields['password'] = password
         ..fields['alamat'] = alamat
         ..fields['telp'] = telp
-        ..files.add(
-          new http.MultipartFile.fromBytes(
-            'foto',
-            bytes,
-            filename: fileName,
-          ),
-        );
+        ..files.add(new http.MultipartFile('foto', stream, length,
+            filename: path.basename(foto.path)));
       await requestData.send();
+
       return "Data Berhasil di update";
     } catch (e) {
       return "Data Gagal di update";

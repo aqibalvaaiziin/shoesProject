@@ -14,7 +14,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  Uint8List _bytesImage;
+  Uint8List dataImage;
   String id, name, email, address, phone, foto;
   UserPreferences _userData = UserPreferences();
 
@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
     address = await _userData.getAlamat();
     phone = await _userData.getTelp();
     foto = await _userData.getFoto();
-    _bytesImage = Base64Decoder().convert(foto);
+    dataImage = base64Decode(foto);
     setState(() {});
   }
 
@@ -46,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               height: 80,
             ),
-            _bytesImage == null
+            dataImage == null
                 ? Center(
                     child: Stack(
                       children: <Widget>[
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: MemoryImage(_bytesImage)),
+                                  image: MemoryImage(dataImage)),
                             ),
                           ),
                         ],
