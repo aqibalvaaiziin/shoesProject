@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RegisterFactory {
-  int id;
+  String id;
   String nama;
   String email;
   String password;
@@ -22,7 +22,7 @@ class RegisterFactory {
 
   factory RegisterFactory.createPostResult(Map<String, dynamic> object) {
     return RegisterFactory(
-      id: object['id_user'],
+      id: object['id_user'].toString(),
       nama: object['nama'],
       email: object['email'],
       password: object['password'],

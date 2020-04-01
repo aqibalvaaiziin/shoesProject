@@ -20,20 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   ProfileFactory dataProfile = ProfileFactory();
   UserPreferences _data = new UserPreferences();
 
-  void setDataProfile() {
-    ProfileFactory.setRequest().then((value) {
-      dataProfile = value;
-      _data.setIdUser(dataProfile.id);
-      _data.setName(dataProfile.name);
-      _data.setEmail(dataProfile.email);
-      _data.setAlamat(dataProfile.alamat);
-      _data.setTelp(dataProfile.telp);
-      _data.setFoto(dataProfile.foto);
-      _data.getName().then((value) {
-        print(value);
-      });
-    });
-  }
+  void setDataProfile() {}
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (loginFactory.tokenType == "bearerHeader") {
                             _data.setTokenCode(loginFactory.token);
                             _data.setTokenType(loginFactory.tokenType);
-                            setDataProfile();
+                            setState(() {});
                             Alert(
                                 content: CustomIcon.check,
                                 context: context,

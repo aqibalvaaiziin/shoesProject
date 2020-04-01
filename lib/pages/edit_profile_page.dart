@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -7,8 +5,10 @@ import 'package:shoes/factory/edit_profile_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/main.dart';
 import 'dart:io';
-import 'package:image/image.dart' as ImageProcess;
 import 'package:shoes/preference/user_preferences.dart';
+
+import '../icons/icon.dart';
+import '../icons/icon.dart';
 
 class EditProfilePage extends StatefulWidget {
   final int idUser;
@@ -20,13 +20,30 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   _EditProfilePageState({idUser});
   File _image;
-  TextEditingController nama = TextEditingController();
+  TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController alamat = TextEditingController();
+  TextEditingController address = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController telp = TextEditingController();
-  String data;
-  UserPreferences _dataUser = UserPreferences();
+  bool isError = false;
+  String response;
+
+  void _dataSend() async {
+    response = await EditProfileFactory.putData(
+      widget.idUser,
+      name.text,
+      email.text,
+      password.text,
+      address.text,
+      telp.text,
+      _image,
+    );
+
+    if (response == null)
+      isError = false;
+    else
+      isError = true;
+  }
 
   void open_camera() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -60,20 +77,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       color: Colors.grey),
                 ),
               ),
-              Positioned(
-                left: 115,
-                top: 70,
-                child: Container(
-                  margin: EdgeInsets.only(top: 40),
-                  width: 180,
-                  height: 180,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: _image == null
-                          ? AssetImage("assets/images/user.png")
-                          : FileImage(_image),
+              Container(
+                margin: EdgeInsets.only(top: 110),
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: Container(
+                    width: 180,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: _image == null
+                            ? AssetImage("assets/images/user.png")
+                            : FileImage(_image),
+                      ),
                     ),
                   ),
                 ),
@@ -92,7 +110,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       child: Column(
                         children: <Widget>[
                           TextField(
-                            controller: nama,
+                            controller: name,
                             decoration: InputDecoration(
                                 icon: Icon(
                                   Icons.person,
@@ -131,7 +149,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 labelStyle: TextStyle(color: Colors.grey)),
                           ),
                           TextField(
-                            controller: alamat,
+                            controller: address,
                             decoration: InputDecoration(
                                 icon: Icon(
                                   Icons.location_on,
@@ -178,65 +196,68 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(20),
                                     onTap: () {
-                                      final _imageFile =
-                                          ImageProcess.decodeImage(
-                                        _image.readAsBytesSync(),
-                                      );
-                                      String base64Image = base64Encode(
-                                          ImageProcess.encodePng(_imageFile));
-                                      EditProfileFactory.setRequest(
-                                        widget.idUser,
-                                        nama.text,
-                                        email.text,
-                                        password.text,
-                                        alamat.text,
-                                        telp.text,
-                                        _image,
-                                      ).then((value) {
-                                        data = value;
-                                      });
-                                      _dataUser.setName(nama.text);
-                                      _dataUser.setEmail(email.text);
-                                      _dataUser.setPassword(password.text);
-                                      _dataUser.setAlamat(alamat.text);
-                                      _dataUser.setTelp(telp.text);
-                                      _dataUser.setFoto(base64Image);
-                                      Alert(
-                                          content: CustomIcon.check,
-                                          context: context,
-                                          style: AlertStyle(
-                                              backgroundColor: Colors.grey[200],
-                                              animationDuration:
-                                                  Duration(milliseconds: 600),
-                                              animationType: AnimationType.grow,
-                                              titleStyle: TextStyle(
-                                                fontSize: 23,
-                                                fontFamily: "D",
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                              isCloseButton: false,
-                                              overlayColor: Colors.black87),
-                                          title: "Data berhasil di update",
-                                          buttons: [
-                                            DialogButton(
-                                                width: 150,
-                                                color: Color(0xaa18c5f5),
-                                                child: Text(
-                                                  "Kembali ke halaman profile ?",
-                                                  style: TextStyle(
-                                                      fontSize: 17,
-                                                      fontFamily: "D",
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              MyApp()));
-                                                }),
-                                          ]).show();
+                                      _dataSend();
+                                      setState(() {});
+                                      isError
+                                          ? Alert(
+                                              content: CustomIcon.check,
+                                              context: context,
+                                              style: AlertStyle(
+                                                  backgroundColor:
+                                                      Colors.grey[200],
+                                                  animationDuration: Duration(
+                                                      milliseconds: 600),
+                                                  animationType:
+                                                      AnimationType.grow,
+                                                  titleStyle: TextStyle(
+                                                    fontSize: 23,
+                                                    fontFamily: "D",
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                  isCloseButton: false,
+                                                  overlayColor: Colors.black87),
+                                              title: "Update Berhasil",
+                                              buttons: [
+                                                  DialogButton(
+                                                      width: 150,
+                                                      color: Color(0xaa18c5f5),
+                                                      child: Text(
+                                                        "Kembali ke toko ?",
+                                                        style: TextStyle(
+                                                            fontSize: 17,
+                                                            fontFamily: "D",
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        MyApp()));
+                                                      }),
+                                                ]).show()
+                                          : Alert(
+                                              context: context,
+                                              content: CustomIcon.remove,
+                                              style: AlertStyle(
+                                                  backgroundColor:
+                                                      Colors.grey[200],
+                                                  animationDuration: Duration(
+                                                      milliseconds: 600),
+                                                  animationType:
+                                                      AnimationType.grow,
+                                                  titleStyle: TextStyle(
+                                                    fontSize: 23,
+                                                    fontFamily: "FL",
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  isCloseButton: false,
+                                                  overlayColor: Colors.black87),
+                                              title: "Gagal mengubah profile",
+                                            ).show();
                                     },
                                     child: Text(
                                       "SIMPAN",
@@ -267,7 +288,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               Positioned(
                 top: 215,
-                right: 100,
+                right: 110,
                 child: Container(
                   width: 55,
                   height: 55,
@@ -322,5 +343,37 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ],
       ),
     );
+  }
+
+  Widget message(String message1, String message2, Widget icon) {
+    Alert(
+        content: icon,
+        context: context,
+        style: AlertStyle(
+            backgroundColor: Colors.grey[200],
+            animationDuration: Duration(milliseconds: 600),
+            animationType: AnimationType.grow,
+            titleStyle: TextStyle(
+              fontSize: 23,
+              fontFamily: "D",
+              fontWeight: FontWeight.w700,
+            ),
+            isCloseButton: false,
+            overlayColor: Colors.black87),
+        title: message1,
+        buttons: [
+          DialogButton(
+              width: 210,
+              color: Color(0xaa18c5f5),
+              child: Text(
+                message2,
+                style: TextStyle(
+                    fontSize: 17, fontFamily: "D", fontWeight: FontWeight.w500),
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => MyApp()));
+              }),
+        ]).show();
   }
 }

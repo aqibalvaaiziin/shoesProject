@@ -5,9 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:shoes/preference/user_preferences.dart';
 
 class ProfileFactory {
-  String id;
+  int id;
   String name;
   String email;
+  String password;
   String alamat;
   String telp;
   String foto;
@@ -16,6 +17,7 @@ class ProfileFactory {
     this.id,
     this.name,
     this.email,
+    this.password,
     this.alamat,
     this.telp,
     this.foto,
@@ -23,12 +25,14 @@ class ProfileFactory {
 
   factory ProfileFactory.getResponse(Map<String, dynamic> object) {
     return ProfileFactory(
-      id: object['id_user'].toString(),
+      id: object['id_user'],
       name: object['nama'],
       email: object['email'],
+      password: object['password'],
       alamat: object['alamat'],
       telp: object['telp'],
       foto: object['foto'],
+      
     );
   }
 
@@ -42,9 +46,8 @@ class ProfileFactory {
       headers: {HttpHeaders.authorizationHeader: "$type $token"},
     );
     var jsonObject = json.decode(apiResult.body);
-    var data = (jsonObject as Map<String, dynamic>)['data'];
-    // print(data);
-    return ProfileFactory.getResponse(data);
+    var result = (jsonObject as Map<String, dynamic>)['data'];
+    print(result);
+    return ProfileFactory.getResponse(result);
   }
-
 }

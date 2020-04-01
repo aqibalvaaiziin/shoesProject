@@ -1,43 +1,39 @@
 import 'dart:io';
-import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
-import 'package:path/path.dart' as path;
-import 'package:image/image.dart' as img;
-import 'package:shoes/preference/user_preferences.dart';
+import 'dart:convert';
 
 class EditProfileFactory {
-  static Future<String> setRequest(
+  EditProfileFactory();
+
+  static Future<String> putData(
     int id,
-    String nama,
+    String name,
     String email,
     String password,
-    String alamat,
+    String address,
     String telp,
     File foto,
   ) async {
-    try {
-      var apiUrl = Uri.parse("https://sepatu.gopla.xyz/user/" + id.toString());
-      var stream = new http.ByteStream(DelegatingStream.typed(foto.openRead()));
-      var length = await foto.length();
-      var requestData = http.MultipartRequest('PUT', apiUrl)
-        ..fields['nama'] = nama
-        ..fields['email'] = email
-        ..fields['password'] = password
-        ..fields['alamat'] = alamat
-        ..fields['telp'] = telp
-        ..files.add(new http.MultipartFile('foto', stream, length,
-            filename: path.basename(foto.path)));
-      await requestData.send();
+    String message;
+    String url = "https://sepatu.gopla.xyz/user/" + id.toString();
+    final requestData = http.MultipartRequest('PUT', Uri.parse(url));
+    final file = await http.MultipartFile.fromPath('foto', foto.path);
+    requestData.fields['nama'] = name;
+    requestData.fields['email'] = email;
+    requestData.fields['password'] = password;
+    requestData.fields['alamat'] = address;
+    requestData.fields['telp'] = telp;
+    requestData.files.add(file);
 
-      return "Data Berhasil di update";
+    try {
+      final streamResponse = await requestData.send();
+      final response = await http.Response.fromStream(streamResponse);
+      if (response.statusCode != 200) return message = "gagal update";
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      return message = "update berhasil";
     } catch (e) {
-      return "Data Gagal di update";
+      print(e);
+      return message = "gagal update";
     }
   }
-}
-
-List<int> compress(List<int> bytes) {
-  var image = img.decodeImage(bytes);
-  var resize = img.copyResize(image, width: 180, height: 180);
-  return img.encodePng(resize);
 }

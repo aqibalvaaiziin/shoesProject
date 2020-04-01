@@ -13,6 +13,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:shoes/redux/app_state.dart';
 import 'package:shoes/redux/reducer.dart';
 
+import 'pages/history_page.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final _initalState = AppState();
@@ -58,11 +60,17 @@ class AppRun extends StatelessWidget {
 }
 
 class MyApp extends StatefulWidget {
-  @override
+  @override 
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -79,7 +87,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               HomePage(),
               FavouritePage(),
-              RetailPage(),
+              HistoryPage(),
               Center(
                 child: ProfilePage(),
               ),

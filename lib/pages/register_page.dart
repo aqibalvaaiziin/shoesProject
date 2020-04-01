@@ -153,14 +153,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                 title: "Register Berhasil Berhasil",
                                 buttons: [
                                   DialogButton(
-                                      width: 150,
+                                      width: 190,
                                       color: Color(0xaa18c5f5),
-                                      child: Text(
-                                        "Kembali ke halaman login ?",
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontFamily: "D",
-                                            fontWeight: FontWeight.w500),
+                                      child: Center(
+                                        child: Text(
+                                          "Kembali ke halaman login ?",
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontFamily: "D",
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                       onPressed: () {
                                         Navigator.push(

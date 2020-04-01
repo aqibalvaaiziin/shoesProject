@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
-import 'package:shoes/preference/user_preferences.dart';
 import 'package:shoes/widgets/profile_page/profile.dart';
 
+import '../factory/profile_factory.dart';
+import '../preference/user_preferences.dart';
 import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,24 +13,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  Uint8List dataImage;
-  String id, name, email, address, phone, foto;
-  UserPreferences _userData = UserPreferences();
+  String name, email, address, phone, foto;
+  int id;
+  ProfileFactory data = null;
+  UserPreferences _data = UserPreferences();
 
-  void dataProfile() async {
-    id = await _userData.getIdUser();
-    name = await _userData.getName();
-    email = await _userData.getEmail();
-    address = await _userData.getAlamat();
-    phone = await _userData.getTelp();
-    foto = await _userData.getFoto();
-    dataImage = base64Decode(foto);
-    setState(() {});
+  void getDataProfile() {
+    ProfileFactory.setRequest().then((value) {
+      setState(() {
+        data = value;
+        _data.setIdUser(data.id);
+      });
+      setState(() async {
+        id = await _data.getIdUser();
+      });
+    });
   }
 
   @override
   void initState() {
-    dataProfile();
+    getDataProfile();
     super.initState();
   }
 
@@ -46,52 +47,32 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               height: 80,
             ),
-            dataImage == null
-                ? Center(
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(top: 40),
-                          width: 180,
-                          height: 180,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/images/user.png")),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : RotationTransition(
-                    turns: AlwaysStoppedAnimation(360 / 4),
-                    child: Center(
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(top: 40),
-                            width: 180,
-                            height: 180,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: MemoryImage(dataImage)),
-                            ),
-                          ),
-                        ],
+            Center(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 40),
+                    width: 180,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: MemoryImage(base64Decode(data.foto)),
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
             SizedBox(
               height: 50,
             ),
             Profile(
-              name.toString(),
-              email.toString(),
-              address.toString(),
-              phone.toString(),
+              data.name,
+              data.email,
+              data.alamat,
+              data.telp,
             ),
           ],
         ),
@@ -102,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return EditProfilePage(idUser: int.parse(id));
+                return EditProfilePage(idUser: id);
               },
             ),
           );
