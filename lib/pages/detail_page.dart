@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
+import 'package:shoes/widgets/cart_page/cart_button.dart';
 import 'package:shoes/widgets/detail_page/size_shoes.dart';
 
 import 'cart_page.dart';
@@ -22,38 +23,19 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => CartPage(),
-            ),
-          );
-        },
-        child: Container(
-          width: 250,
-          height: 55,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Center(
-            child: Text(
-              "Jumlah Item yang dibeli : 5",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: "D",
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white),
-            ),
-          ),
-        ),
-      ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CartPage(),
+              ),
+            );
+          },
+          child: CartButton()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [Colors.grey, Colors.white, Colors.grey],
-        )),
+          color: Color(0x34556fae).withAlpha(18),
+        ),
         child: ListView(
           children: [
             Column(
@@ -65,7 +47,7 @@ class _DetailPageState extends State<DetailPage> {
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: Container(child: CustomIcon.backW)),
+                      child: Container(child: CustomIcon.back)),
                 ),
                 SizedBox(
                   height: 80,
@@ -227,12 +209,21 @@ class _DetailPageState extends State<DetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              margin: EdgeInsets.only(top: 18, left: 10),
+                              margin: EdgeInsets.only(top: 12, left: 10),
                               width: 145.0,
                               height: 40.0,
-                              child: Text(
-                                "Woman Original",
-                                style: TextStyle(fontFamily: "F", fontSize: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "OZWEEGO",
+                                    style: TextStyle(fontFamily: "F", fontSize: 15,letterSpacing: 1.5),
+                                  ),
+                                  Text(
+                                    "For Man",
+                                    style: TextStyle(fontFamily: "FL", fontSize: 17,letterSpacing: 1),
+                                  ),
+                                ],
                               ),
                             ),
                             Container(
@@ -254,76 +245,27 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     Positioned(
-                      left: 22,
-                      top: 450,
-                      child: Text(
-                        "Harga",
-                        style: TextStyle(fontFamily: "F", color: Colors.grey),
-                      ),
-                    ),
-                    Positioned(
-                      top: 480,
-                      left: 11,
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              child: Text(
-                                "Rp. " + widget.shoesPrice.toString(),
-                                style:
-                                    TextStyle(fontSize: 40, fontFamily: "AD"),
+                        top: 480,
+                        left: 51,
+                        right: 51,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.grey[700]),
+                          child: Center(
+                            child: Text(
+                              "Buy  Rp. " + widget.shoesPrice.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "CB",
+                                fontSize: 17,
+                                color: Colors.white,
+                                letterSpacing: 1
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 25),
-                              width: MediaQuery.of(context).size.width,
-                              height: 60,
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                    width: 3, color: Colors.grey[100]),
-                                gradient: LinearGradient(
-                                  colors: [Colors.black, Colors.grey],
-                                ),
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    "Add To Cart ",
-                                    style: TextStyle(
-                                      fontFamily: "NHL",
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.add,
-                                    size: 40,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Transform.translate(
-                      offset: Offset(285, 520),
-                      child: Image(
-                        width: 100,
-                        height: 100,
-                        image: AssetImage("assets/images/adidascart.png"),
-                      ),
-                    )
+                          ),
+                        )),
                   ],
                 ),
               ],

@@ -109,61 +109,66 @@ class _RetailPageState extends State<RetailPage> {
               child: ListView.builder(
             itemCount: result.length,
             itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey[300],
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: Offset(5, 8)),
-                  ],
-                ),
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.store_mall_directory,
-                      size: 70,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            result[index].nama,
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontFamily: "D",
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            result[index].telp,
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "FL",
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            result[index].lokasi,
-                            style: TextStyle(
-                              fontFamily: "FL",
-                              fontSize: 13,
-                              color: Colors.grey,
-                            ),
-                          )
-                        ],
+              return GestureDetector(
+                onTap: () {
+                  print(result[index].id);
+                },
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey[300],
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                          offset: Offset(5, 8)),
+                    ],
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.store_mall_directory,
+                        size: 70,
                       ),
-                    )
-                  ],
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              result[index].nama,
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontFamily: "D",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              result[index].telp,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "FL",
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              result[index].lokasi,
+                              style: TextStyle(
+                                fontFamily: "FL",
+                                fontSize: 13,
+                                color: Colors.grey,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
             },

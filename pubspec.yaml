@@ -78,15 +78,25 @@ flutter:
     - family: F
       fonts:
         - asset: assets/fonts/futura.ttf
+    
     - family: FL
       fonts:
         - asset: assets/fonts/FuturaLight.ttf
+    
     - family: D
       fonts:
         - asset: assets/fonts/D-DINCondensed.otf
+    
     - family: "AD"
       fonts:
         - asset: assets/fonts/ITCAvantGardeStd-Demi.otf
-  
+    
+    - family: "M"
+      fonts:
+        - asset: assets\fonts\Marat Sans ExtraLight.otf
+    
+    - family: "CB"
+      fonts:
+        - asset: assets\fonts\Campton-BoldDEMO.otf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

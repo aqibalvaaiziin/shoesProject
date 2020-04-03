@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/cart_page.dart';
+import 'package:shoes/widgets/cart_page/cart_button.dart';
 import 'package:shoes/widgets/main_page/product_card.dart';
 
 class MainPage extends StatefulWidget {
@@ -54,24 +55,7 @@ class _MainPageState extends State<MainPage> {
             ),
           );
         },
-        child: Container(
-          width: 250,
-          height: 55,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Center(
-            child: Text(
-              "Jumlah Item yang dibeli : 5",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: "D",
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white),
-            ),
-          ),
-        ),
+        child: CartButton(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(

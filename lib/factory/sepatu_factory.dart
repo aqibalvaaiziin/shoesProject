@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class BestSellerFactory {
+class SepatuFactory {
   int id;
   String nama;
   String tipe;
@@ -13,7 +13,7 @@ class BestSellerFactory {
   int stock;
   String gambar;
 
-  BestSellerFactory(
+  SepatuFactory(
       {this.id,
       this.nama,
       this.tipe,
@@ -24,8 +24,8 @@ class BestSellerFactory {
       this.stock,
       this.gambar});
 
-  factory BestSellerFactory.result(Map<String, dynamic> object) {
-    return BestSellerFactory(
+  factory SepatuFactory.result(Map<String, dynamic> object) {
+    return SepatuFactory(
       id: object['id_sepatu'],
       nama: object['nama'],
       tipe: object['tipe'],
@@ -38,14 +38,28 @@ class BestSellerFactory {
     );
   }
 
-  static Future<List<BestSellerFactory>> setResponse() async {
+    // static Future<List<SepatuFactory>> byType() async {
+  //   String url = "https://sepatu.gopla.xyz/sepatu/group/bestseller";
+  //   var apiResult = await http.get(url);
+  //   var jsonObject = json.decode(apiResult.body);
+  //   List<SepatuFactory> dataShoes = [];
+  //   for (var i = 0; i < jsonObject.length; i++) {
+  //     dataShoes.add(SepatuFactory.result(jsonObject[i]));
+  //   }
+  //   return dataShoes;
+  // }
+
+  static Future<List<SepatuFactory>> bestSeller() async {
     String url = "https://sepatu.gopla.xyz/sepatu/group/bestseller";
     var apiResult = await http.get(url);
     var jsonObject = json.decode(apiResult.body);
-    List<BestSellerFactory> dataShoes = [];
+    List<SepatuFactory> dataShoes = [];
     for (var i = 0; i < jsonObject.length; i++) {
-      dataShoes.add(BestSellerFactory.result(jsonObject[i]));
+      dataShoes.add(SepatuFactory.result(jsonObject[i]));
     }
     return dataShoes;
   }
+
+
+
 }

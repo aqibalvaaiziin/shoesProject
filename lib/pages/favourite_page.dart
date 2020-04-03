@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/factory/best_seller_factory.dart';
+import 'package:shoes/factory/sepatu_factory.dart';
 import 'package:shoes/widgets/favourite_page/card_brand.dart';
 
 class FavouritePage extends StatefulWidget {
@@ -8,10 +8,10 @@ class FavouritePage extends StatefulWidget {
 }
 
 class _FavouritePageState extends State<FavouritePage> {
-  var result = List<BestSellerFactory>();
+  var result = List<SepatuFactory>();
 
   void dataBestSeller() {
-    BestSellerFactory.setResponse().then((value) {
+    SepatuFactory.bestSeller().then((value) {
       for (var i = 0; i < value.length; i++) {
         setState(() {
           result.add(value[i]);
