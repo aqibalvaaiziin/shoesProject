@@ -1,34 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/factory/best_seller_factory.dart';
 import 'package:shoes/widgets/favourite_page/card_brand.dart';
 
-class FavouritePage extends StatelessWidget {
-  var lala = [
-    {
-      "name": "Adidas Nice Type",
-      "desc":
-          "This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product",
-      "image": "assets/images/ozwpr.png"
-    },
-    {
-      "name": "Adidas Nice Type",
-      "desc":
-          "This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product",
-      "image": "assets/images/ozwp.png"
-    },
-    {
-      "name": "Adidas Nice Type",
-      "desc":
-          "This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product",
-      "image": "assets/images/ozwbl.png"
-    },
-    {
-      "name": "Adidas Nice Type",
-      "desc":
-          "This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product This is is a good product we have and now you can feel our best product",
-      "image": "assets/images/ozwmcn.png"
-    },
-    
-  ];
+class FavouritePage extends StatefulWidget {
+  @override
+  _FavouritePageState createState() => _FavouritePageState();
+}
+
+class _FavouritePageState extends State<FavouritePage> {
+  var result = List<BestSellerFactory>();
+
+  void dataBestSeller() {
+    BestSellerFactory.setResponse().then((value) {
+      for (var i = 0; i < value.length; i++) {
+        setState(() {
+          result.add(value[i]);
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    dataBestSeller();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +44,7 @@ class FavouritePage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: ListView.builder(
-        itemCount: lala.length,
+        itemCount: result.length,
         itemBuilder: (context, index) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,9 +53,9 @@ class FavouritePage extends StatelessWidget {
                 height: 10,
               ),
               CardBrand(
-                lala[index]['name'],
-                lala[index]['desc'],
-                lala[index]['image'],
+                result[index].nama,
+                result[index].desc,
+                result[index].gambar,
               ),
             ],
           );

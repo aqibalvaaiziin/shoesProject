@@ -85,7 +85,7 @@ class _RetailPageState extends State<RetailPage> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.grey[200],

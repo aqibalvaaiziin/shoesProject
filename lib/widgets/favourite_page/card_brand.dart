@@ -24,9 +24,8 @@ class CardBrand extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 blurRadius: 10.5,
-                spreadRadius: 2,
                 color: Colors.grey[300],
-                offset: Offset(0, 10),
+                offset: Offset(0, 6),
               ),
             ],
           ),

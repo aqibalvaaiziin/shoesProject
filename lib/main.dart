@@ -49,7 +49,7 @@ class AppRun extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute:
-            initialCode == "" || initialCode == null ? '/login' : '/home',
+            initialCode == "" || initialCode == null ? '/home' : '/home',
         routes: {
           '/login': (context) => LoginPage(),
           '/home': (context) => MyApp(),
@@ -60,7 +60,7 @@ class AppRun extends StatelessWidget {
 }
 
 class MyApp extends StatefulWidget {
-  @override 
+  @override
   _MyAppState createState() => _MyAppState();
 }
 
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               HomePage(),
               FavouritePage(),
-              HistoryPage(),
+              RetailPage(),
               Center(
                 child: ProfilePage(),
               ),

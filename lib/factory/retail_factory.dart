@@ -19,15 +19,14 @@ class RetailFactory {
     );
   }
 
-  static Future<List<RetailFactory>> getRetail() async{
+  static Future<List<RetailFactory>> getRetail() async {
     String apiUrl = "https://sepatu.gopla.xyz/retail";
     var apiResult = await http.get(apiUrl);
     var jsonObject = json.decode(apiResult.body);
     List<RetailFactory> listRetail = [];
     for (var i = 0; i < jsonObject.length; i++) {
       listRetail.add(RetailFactory.createReseultObject(jsonObject[i]));
-    } 
+    }
     return listRetail;
   }
-
 }

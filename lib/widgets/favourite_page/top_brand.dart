@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -37,7 +39,7 @@ class TwoShoes extends StatelessWidget {
                 child: Image(
                   width: 160,
                   height: 160,
-                  image: AssetImage(image),
+                  image: MemoryImage(base64Decode(image)),
                 ),
               ),
             ),
@@ -53,7 +55,7 @@ class TwoShoes extends StatelessWidget {
                 child: Image(
                   width: 170,
                   height: 170,
-                  image: AssetImage(image),
+                  image: MemoryImage(base64Decode(image)),
                 ),
               ),
             ),
