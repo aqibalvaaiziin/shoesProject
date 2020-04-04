@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class EditProfileFactory {
   EditProfileFactory();
@@ -14,7 +13,6 @@ class EditProfileFactory {
     String telp,
     File foto,
   ) async {
-    String message;
     String url = "https://sepatu.gopla.xyz/user/" + id.toString();
     final requestData = http.MultipartRequest('PUT', Uri.parse(url));
     final file = await http.MultipartFile.fromPath('foto', foto.path);
@@ -28,12 +26,11 @@ class EditProfileFactory {
     try {
       final streamResponse = await requestData.send();
       final response = await http.Response.fromStream(streamResponse);
-      if (response.statusCode != 200) return message = "gagal update";
-      final Map<String, dynamic> responseData = json.decode(response.body);
-      return message = "update berhasil";
+      if (response.statusCode != 200) return "gagal update";
+      return "update berhasil";
     } catch (e) {
       print(e);
-      return message = "gagal update";
+      return "gagal update";
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/factory/retail_factory.dart';
 import 'package:shoes/icons/icon.dart';
-import 'package:shoes/pages/profile_page.dart';
 
 class RetailPage extends StatefulWidget {
   @override
@@ -33,7 +32,7 @@ class _RetailPageState extends State<RetailPage> {
   void onSearchTextChanged(String text) async {
     List<RetailFactory> searchResult = List<RetailFactory>();
     searchResult.addAll(temp);
-    if (search != null || search != "") {
+    if (search != null) {
       List<RetailFactory> dummy = List<RetailFactory>();
       searchResult.forEach((item) {
         if (item.nama.toLowerCase().contains(text) ||

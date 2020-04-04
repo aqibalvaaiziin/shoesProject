@@ -4,7 +4,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shoes/factory/login_factory.dart';
 import 'package:shoes/factory/profile_factory.dart';
 import 'package:shoes/icons/icon.dart';
-import 'package:shoes/main.dart';
 import 'package:shoes/pages/register_page.dart';
 import 'package:shoes/preference/user_preferences.dart';
 import 'package:shoes/redux/app_state.dart';
@@ -20,7 +19,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  LoginFactory loginFactory = null;
+  LoginFactory loginFactory;
   ProfileFactory dataProfile = ProfileFactory();
   UserPreferences _data = new UserPreferences();
 

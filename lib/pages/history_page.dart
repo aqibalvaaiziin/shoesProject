@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-import '../preference/user_preferences.dart';
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -10,7 +9,6 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  UserPreferences _data = UserPreferences();
   String text = "lala";
   String text2;
   bool status = false;

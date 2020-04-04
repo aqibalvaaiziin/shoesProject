@@ -16,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController password = TextEditingController();
   TextEditingController alamat = TextEditingController();
   TextEditingController telp = TextEditingController();
-  RegisterFactory registerFactory = null;
+  RegisterFactory registerFactory;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

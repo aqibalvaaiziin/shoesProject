@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:shoes/pages/edit_profile_page.dart';
@@ -19,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String name, email, address, phone, foto;
   int id;
-  ProfileFactory data = null;
+  ProfileFactory data;
   UserPreferences _data = UserPreferences();
 
   void getDataProfile() {

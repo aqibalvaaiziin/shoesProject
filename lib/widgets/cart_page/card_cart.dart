@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/icons/icon.dart';
 
 class CardCart extends StatefulWidget {
   final String name;

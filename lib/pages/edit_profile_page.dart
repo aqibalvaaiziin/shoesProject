@@ -3,7 +3,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shoes/factory/edit_profile_factory.dart';
 import 'package:shoes/icons/icon.dart';
-import 'package:shoes/main.dart';
 import 'dart:io';
 
 import '../icons/icon.dart';
