@@ -5,15 +5,17 @@ class CardBrand extends StatelessWidget {
   String name;
   String desc;
   String image;
-  CardBrand(String dataName, String dataDesc, String dataImage) {
+  int price;
+  CardBrand(String dataName, String dataDesc, String dataImage, int price) {
     this.name = dataName;
     this.desc = dataDesc;
     this.image = dataImage;
+    this.price = price;
   }
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width ,
+      width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Card(
         child: Container(
@@ -53,23 +55,42 @@ class CardBrand extends StatelessWidget {
                             text: name),
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.only(right: 10),
-                      height: 85,
-                      child: RichText(
-                        textAlign: TextAlign.justify,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 5,
-                        text: TextSpan(
-                          style: TextStyle(
-                            fontFamily: "FL",
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(right: 10),
+                          height: 85,
+                          child: RichText(
+                            textAlign: TextAlign.justify,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 5,
+                            text: TextSpan(
+                              style: TextStyle(
+                                fontFamily: "FL",
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                              text: desc,
+                            ),
                           ),
-                          text: desc,
                         ),
-                      ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            "Rp. " + price.toString(),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: "AD",
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),

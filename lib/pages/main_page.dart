@@ -1,54 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/factory/sepatu_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/cart_page.dart';
+import 'package:shoes/pages/detail_page.dart';
 import 'package:shoes/widgets/cart_page/cart_button.dart';
 import 'package:shoes/widgets/main_page/product_card.dart';
 
 class MainPage extends StatefulWidget {
+  final String shoesType;
+  MainPage({this.shoesType});
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  var lala = [
-    {
-      "image": "assets/images/ozwb.png",
-      "name": "Adidas Biru",
-      "price": 2100000,
-      "isFav": true
-    },
-    {
-      "image": "assets/images/ozwbl.png",
-      "name": "Adidas Hitam",
-      "price": 2300000,
-      "isFav": false
-    },
-    {
-      "image": "assets/images/ozwp.png",
-      "name": "Adidas Pink",
-      "price": 500000,
-      "isFav": true
-    },
-    {
-      "image": "assets/images/ozwpr.png",
-      "name": "Adidas Black Pink",
-      "price": 3300000,
-      "isFav": false
-    },
-    {
-      "image": "assets/images/ozwmcn.png",
-      "name": "Adidas Macan",
-      "price": 1700000,
-      "isFav": true
-    },
-  ];
   TextEditingController search = TextEditingController();
+  var result = List<SepatuFactory>();
+
+  void dataShoesType() {
+    SepatuFactory.byType(widget.shoesType).then((value) {
+      for (var i = 0; i < value.length; i++) {
+        setState(() {
+          result.add(value[i]);
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    dataShoesType();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: GestureDetector(
         onTap: () {
-          print("object");
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => CartPage(),
@@ -87,7 +76,7 @@ class _MainPageState extends State<MainPage> {
                 child: Container(
                   margin: EdgeInsets.only(top: 15),
                   child: Text(
-                    "234 Result",
+                    result.length.toString() + " Result for this type",
                     style: TextStyle(fontSize: 20, fontFamily: "FL"),
                   ),
                 ),
@@ -105,9 +94,19 @@ class _MainPageState extends State<MainPage> {
               ),
               Center(
                 child: Wrap(
-                  children: lala.map((data) {
-                    return CardProducts(data['image'], data['name'],
-                        data['price'], data['isFav']);
+                  children: result.map((data) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                      shoesName: "sdasda",
+                                    )));
+                      },
+                      child: CardProducts(
+                          data.gambar, data.nama, data.harga, true),
+                    );
                   }).toList(),
                 ),
               )

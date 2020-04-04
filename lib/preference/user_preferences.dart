@@ -30,4 +30,5 @@ class UserPreferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getInt("idUser") ?? null;
   }
+
 }

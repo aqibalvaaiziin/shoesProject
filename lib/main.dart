@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shoes/icons/icon.dart';
-import 'package:shoes/pages/favourite_page.dart';
-import 'package:shoes/pages/history_page.dart';
-import 'package:shoes/pages/home_page.dart';
 import 'package:shoes/pages/login_page.dart';
-import 'package:shoes/pages/profile_page.dart';
-import 'package:shoes/pages/retail_page.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:shoes/redux/app_state.dart';
 import 'package:shoes/redux/reducer.dart';
 
-import 'pages/history_page.dart';
+import 'pages/MyApp.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,98 +20,34 @@ void main() {
   );
 }
 
-String initialCode;
+String dataRoute;
 
-void setCode() async {
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  pref.setString("initCode", "login");
-}
-
-Future<String> getCode() async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  return preferences.getString("initCode") ?? null;
-}
-
-class AppRun extends StatelessWidget {
+class AppRun extends StatefulWidget {
   final Store<AppState> store;
   AppRun({this.store});
   @override
+  _AppRunState createState() => _AppRunState();
+}
+
+class _AppRunState extends State<AppRun> {
+  @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
-      store: store,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute:
-            initialCode == "" || initialCode == null ? '/home' : '/home',
-        routes: {
-          '/login': (context) => LoginPage(),
-          '/home': (context) => MyApp(),
+      store: widget.store,
+      child: StoreConnector<AppState, AppState>(
+        converter: (store) => store.state,
+        builder: (context, state) {
+          dataRoute = state.isLogedIn;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            initialRoute: state.isLogedIn == "Im login" ? '/home' : '/login',
+            routes: {
+              '/login': (context) => LoginPage(),
+              '/home': (context) => MyApp(),
+            },
+            home: MyApp(),
+          );
         },
-      ),
-    );
-  }
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    setState(() {});
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/favourite': (context) => FavouritePage(),
-        '/history': (context) => HistoryPage(),
-        '/profile': (context) => ProfilePage()
-      },
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          body: TabBarView(
-            children: <Widget>[
-              HomePage(),
-              FavouritePage(),
-              RetailPage(),
-              Center(
-                child: ProfilePage(),
-              ),
-            ],
-          ),
-          bottomNavigationBar: Container(
-            color: Colors.grey[200],
-            child: TabBar(
-              labelColor: Colors.black,
-              indicator: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(color: Colors.black),
-                  ),
-                  color: Colors.white),
-              tabs: <Widget>[
-                Tab(
-                  icon: CustomIcon.home,
-                ),
-                Tab(
-                  icon: CustomIcon.heart,
-                ),
-                Tab(
-                  icon: CustomIcon.bag,
-                ),
-                Tab(
-                  icon: CustomIcon.user,
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

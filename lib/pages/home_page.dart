@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/pages/main_page.dart';
 
-class HomePage extends StatelessWidget {
-  TextEditingController search = TextEditingController();
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String type;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,9 +16,12 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
+              setState(() {
+                type = "USBR Hongkong";
+              });
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => MainPage(),
+                  builder: (context) => MainPage(shoesType: type),
                 ),
               );
             },
@@ -23,9 +31,12 @@ class HomePage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
+              setState(() {
+                type = "superstar";
+              });
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => MainPage(),
+                  builder: (context) => MainPage(shoesType: type),
                 ),
               );
             },
@@ -38,9 +49,12 @@ class HomePage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
+              setState(() {
+                type = "ozw";
+              });
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => MainPage(),
+                  builder: (context) => MainPage(shoesType: type),
                 ),
               );
             },

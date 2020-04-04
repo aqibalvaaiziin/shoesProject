@@ -8,8 +8,8 @@ AppState reducer(AppState prevState, dynamic action) {
     newState.tokenType = action.payload;
   } else if (action is Token) {
     newState.token = action.payload;
-  } else if (action is InitialLoginCode) {
-    newState.initialLoginCode = action.payload;
+  } else if (action is IsLogedIn) {
+    newState.isLogedIn = action.payload;
   }
 
   return newState;

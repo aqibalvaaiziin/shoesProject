@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/widgets/cart_page/cart_button.dart';
@@ -6,11 +8,9 @@ import 'package:shoes/widgets/detail_page/size_shoes.dart';
 import 'cart_page.dart';
 
 class DetailPage extends StatefulWidget {
-  final shoesImage;
   final shoesName;
-  final shoesPrice;
 
-  DetailPage({this.shoesImage, this.shoesName, this.shoesPrice});
+  DetailPage({this.shoesName});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -100,13 +100,13 @@ class _DetailPageState extends State<DetailPage> {
                       left: 20,
                       child: Center(
                         child: Hero(
-                          tag: widget.shoesImage,
+                          tag: "",
                           child: RotationTransition(
                             turns: AlwaysStoppedAnimation(-10 / 360),
                             child: Container(
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(widget.shoesImage),
+                                      image: MemoryImage(base64Decode("")),
                                       fit: BoxFit.cover)),
                               height: 350.0,
                               width: 350.0,
@@ -120,7 +120,7 @@ class _DetailPageState extends State<DetailPage> {
                       right: 65,
                       top: 190,
                       child: Text(
-                        widget.shoesName,
+                        "",
                         style: TextStyle(
                           fontFamily: "AD",
                           fontSize: 28,
@@ -217,11 +217,17 @@ class _DetailPageState extends State<DetailPage> {
                                 children: <Widget>[
                                   Text(
                                     "OZWEEGO",
-                                    style: TextStyle(fontFamily: "F", fontSize: 15,letterSpacing: 1.5),
+                                    style: TextStyle(
+                                        fontFamily: "F",
+                                        fontSize: 15,
+                                        letterSpacing: 1.5),
                                   ),
                                   Text(
                                     "For Man",
-                                    style: TextStyle(fontFamily: "FL", fontSize: 17,letterSpacing: 1),
+                                    style: TextStyle(
+                                        fontFamily: "FL",
+                                        fontSize: 17,
+                                        letterSpacing: 1),
                                   ),
                                 ],
                               ),
@@ -255,14 +261,13 @@ class _DetailPageState extends State<DetailPage> {
                               color: Colors.grey[700]),
                           child: Center(
                             child: Text(
-                              "Buy  Rp. " + widget.shoesPrice.toString(),
+                              "Buy  Rp. ",
                               style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "CB",
-                                fontSize: 17,
-                                color: Colors.white,
-                                letterSpacing: 1
-                              ),
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "CB",
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                  letterSpacing: 1),
                             ),
                           ),
                         )),

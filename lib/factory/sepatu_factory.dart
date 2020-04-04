@@ -38,16 +38,16 @@ class SepatuFactory {
     );
   }
 
-    // static Future<List<SepatuFactory>> byType() async {
-  //   String url = "https://sepatu.gopla.xyz/sepatu/group/bestseller";
-  //   var apiResult = await http.get(url);
-  //   var jsonObject = json.decode(apiResult.body);
-  //   List<SepatuFactory> dataShoes = [];
-  //   for (var i = 0; i < jsonObject.length; i++) {
-  //     dataShoes.add(SepatuFactory.result(jsonObject[i]));
-  //   }
-  //   return dataShoes;
-  // }
+    static Future<List<SepatuFactory>> byType(String type) async {
+    String url = "https://sepatu.gopla.xyz/sepatu/group/type/"+type;
+    var apiResult = await http.get(url);
+    var jsonObject = json.decode(apiResult.body);
+    List<SepatuFactory> dataShoes = [];
+    for (var i = 0; i < jsonObject.length; i++) {
+      dataShoes.add(SepatuFactory.result(jsonObject[i]));
+    }
+    return dataShoes;
+  }
 
   static Future<List<SepatuFactory>> bestSeller() async {
     String url = "https://sepatu.gopla.xyz/sepatu/group/bestseller";

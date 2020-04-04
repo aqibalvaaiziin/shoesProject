@@ -5,10 +5,9 @@ import 'package:shoes/factory/edit_profile_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/main.dart';
 import 'dart:io';
-import 'package:shoes/preference/user_preferences.dart';
 
 import '../icons/icon.dart';
-import '../icons/icon.dart';
+import 'MyApp.dart';
 
 class EditProfilePage extends StatefulWidget {
   final int idUser;
@@ -62,6 +61,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       body: ListView(
         children: <Widget>[
           Stack(

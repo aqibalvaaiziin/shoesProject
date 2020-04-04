@@ -9,7 +9,7 @@ class Token{
   Token(this.payload);
 }
 
-class InitialLoginCode{
+class IsLogedIn{
   final String payload;
-  InitialLoginCode(this.payload);
+  IsLogedIn(this.payload);
 }

@@ -30,18 +30,14 @@ class _FavouritePageState extends State<FavouritePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            "Favourite Brand",
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: "D",
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
-            ),
+            "Favourite Shoes",
+            style:
+                TextStyle(fontSize: 25, fontFamily: "D", color: Colors.black),
           ),
         ),
-        backgroundColor: Colors.white,
       ),
       body: ListView.builder(
         itemCount: result.length,
@@ -56,6 +52,7 @@ class _FavouritePageState extends State<FavouritePage> {
                 result[index].nama,
                 result[index].desc,
                 result[index].gambar,
+                result[index].harga,
               ),
             ],
           );

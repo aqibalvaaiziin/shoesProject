@@ -93,7 +93,7 @@ flutter:
     
     - family: "M"
       fonts:
-        - asset: assets\fonts\Marat Sans ExtraLight.otf
+        - asset: assets\fonts\ms.otf
     
     - family: "CB"
       fonts:
