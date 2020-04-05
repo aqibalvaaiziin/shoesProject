@@ -1,283 +1,303 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shoes/icons/icon.dart';
-import 'package:shoes/widgets/cart_page/cart_button.dart';
-import 'package:shoes/widgets/detail_page/size_shoes.dart';
-
-import 'cart_page.dart';
+import 'package:shoes/pages/cart_page.dart';
 
 class DetailPage extends StatefulWidget {
-  final shoesName;
-
-  DetailPage({this.shoesName});
-
+  final String nama;
+  DetailPage({this.nama});
   @override
   _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
-  var counter = 0;
-  var total = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CartPage(),
-              ),
-            );
-          },
-          child: CartButton()),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Container(
-        decoration: BoxDecoration(
-          color: Color(0x34556fae).withAlpha(18),
+        onTap: () {
+          print("object");
+        },
+        child: Container(
+          margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
+          width: 55,
+          height: 55,
+          decoration: BoxDecoration(
+              color: Colors.black,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black54,
+                    blurRadius: 5,
+                    spreadRadius: 1,
+                    offset: Offset(0, 5))
+              ]),
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                  right: 5,
+                  bottom: 15,
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 15,
+                  )),
+              Center(child: CustomIcon.cart),
+            ],
+          ),
         ),
-        child: ListView(
-          children: [
-            Column(
+      ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: Colors.grey[300],
+          ),
+          Positioned(
+            top: 450,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.5,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 120,
+            left: 40,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: Text(
+                "Ozweego Pusha Blue Tiger",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontFamily: "F",
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 200,
+            left: 40,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 20),
-                  child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(child: CustomIcon.back)),
+                Text(
+                  "Harga",
+                  style: TextStyle(
+                      fontSize: 22, fontFamily: "FL", letterSpacing: 1),
                 ),
                 SizedBox(
-                  height: 80,
+                  height: 5,
                 ),
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      height: MediaQuery.of(context).size.height * .82,
-                      width: MediaQuery.of(context).size.width,
-                      color: Colors.transparent,
-                    ),
-                    Positioned(
-                      top: 215.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50)),
-                          color: Colors.white,
-                        ),
-                        height: MediaQuery.of(context).size.height - 120.0,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        width: 375,
-                        height: 375,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 150,
-                      right: 50,
-                      child: Container(
-                        width: 270,
-                        height: 18,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(color: Colors.grey, blurRadius: 15)
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: -90,
-                      left: 20,
-                      child: Center(
-                        child: Hero(
-                          tag: "",
-                          child: RotationTransition(
-                            turns: AlwaysStoppedAnimation(-10 / 360),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: MemoryImage(base64Decode("")),
-                                      fit: BoxFit.cover)),
-                              height: 350.0,
-                              width: 350.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 65,
-                      right: 65,
-                      top: 190,
-                      child: Text(
-                        "",
-                        style: TextStyle(
-                          fontFamily: "AD",
-                          fontSize: 28,
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Positioned(
-                      top: 228,
-                      left: 50,
-                      right: 50,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: 1,
-                        color: Colors.grey[200],
-                      ),
-                    ),
-                    Positioned(
-                      top: 250,
-                      left: 22,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: 100,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Deskripsi",
-                              style: TextStyle(
-                                  fontFamily: 'F', color: Colors.grey),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                "Lorem ipsum  Facilis, fugit ipsa! Omnis soluta consectetur placeat quod nisi, totam eaque aliquid magni fugiat earum dolorum quo?",
-                                style: TextStyle(fontSize: 15),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 350,
-                      left: 20,
-                      right: 20,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: 1,
-                        color: Colors.grey[200],
-                      ),
-                    ),
-                    Positioned(
-                      top: 370,
-                      left: 22,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.625,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Tipe",
-                              style: TextStyle(
-                                  fontFamily: 'F', color: Colors.grey),
-                            ),
-                            Text(
-                              "Ukuran",
-                              style: TextStyle(
-                                  fontFamily: 'F', color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 389,
-                      left: 15,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 12, left: 10),
-                              width: 145.0,
-                              height: 40.0,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "OZWEEGO",
-                                    style: TextStyle(
-                                        fontFamily: "F",
-                                        fontSize: 15,
-                                        letterSpacing: 1.5),
-                                  ),
-                                  Text(
-                                    "For Man",
-                                    style: TextStyle(
-                                        fontFamily: "FL",
-                                        fontSize: 17,
-                                        letterSpacing: 1),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 2,
-                              height: 30,
-                              color: Colors.grey,
-                            ),
-                            Container(
-                              child: Row(
-                                children: <Widget>[
-                                  SizeShoes("40", true),
-                                  SizeShoes("43", false),
-                                  SizeShoes("44", false),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        top: 480,
-                        left: 51,
-                        right: 51,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.grey[700]),
-                          child: Center(
-                            child: Text(
-                              "Buy  Rp. ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: "CB",
-                                  fontSize: 17,
-                                  color: Colors.white,
-                                  letterSpacing: 1),
-                            ),
-                          ),
-                        )),
-                  ],
+                Text(
+                  "Rp. 3.000.000",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "AD",
+                  ),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            top: 500,
+            left: 90,
+            child: Container(
+              width: 250,
+              height: 20,
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(color: Colors.black, blurRadius: 30, spreadRadius: 3)
+              ]),
+            ),
+          ),
+          Positioned(
+            top: 270,
+            left: 20,
+            child: RotationTransition(
+              turns: AlwaysStoppedAnimation(-15 / 360),
+              child: Image(
+                image: AssetImage("assets/images/ozwmcn.png"),
+                width: 350,
+                height: 350,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 570,
+            left: 40,
+            right: 40,
+            child: Container(
+              width: 350,
+              height: 260,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Ozweego Pusha Blue Tiger ",
+                    style: TextStyle(
+                        fontSize: 25, fontFamily: "F", letterSpacing: 1),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Sepatu Ozweego Pusha merupakan keluaran baru dari Adidas yang mengangkat tema keagungan dengan motif yang memiliki shape mewah",
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    "Details",
+                    style: TextStyle(
+                        fontSize: 30, fontFamily: "F", letterSpacing: 1),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Type      : Ozweego Pusha",
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Gender  : Woman",
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 280,
+            left: 40,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Ukuran",
+                  style: TextStyle(
+                      fontSize: 22, fontFamily: "FL", letterSpacing: 1),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: 120,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      GestureDetector(
+                          onTap: () {
+                            print("lala");
+                          },
+                          child: sizeShoes("43", true)),
+                      sizeShoes("44", false),
+                      sizeShoes("45", false),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(40, 45),
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: 20,
+                      height: 40,
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => CartPage()));
+                    },
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black54,
+                            blurRadius: 5,
+                            spreadRadius: 1,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Stack(
+                        children: <Widget>[
+                          Center(child: CustomIcon.cartAll),
+                          Transform.translate(
+                            offset: Offset(35, 3),
+                            child: Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: Colors.white),
+                              child: Center(
+                                child: Text(
+                                  "8",
+                                  style:
+                                      TextStyle(fontSize: 10, fontFamily: "F"),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
+}
+
+Widget sizeShoes(String size, bool selected) {
+  return Container(
+    width: 35,
+    height: 35,
+    decoration: BoxDecoration(
+      color: selected == true ? Colors.black : Colors.white,
+      borderRadius: BorderRadius.circular(3),
+    ),
+    child: Center(
+        child: Text(
+      size,
+      style: TextStyle(
+          fontFamily: "D",
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+          letterSpacing: 1,
+          color: selected == true ? Colors.white : Colors.black),
+    )),
+  );
 }

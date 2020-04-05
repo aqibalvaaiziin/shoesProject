@@ -16,6 +16,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   TextEditingController search = TextEditingController();
   var result = List<SepatuFactory>();
+  String name;
 
   void dataShoesType() {
     SepatuFactory.byType(widget.shoesType).then((value) {
@@ -97,12 +98,11 @@ class _MainPageState extends State<MainPage> {
                   children: result.map((data) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                      shoesName: "sdasda",
-                                    )));
+                        setState(() {
+                          name = data.nama;
+                        });
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => DetailPage(nama: name)));
                       },
                       child: CardProducts(
                           data.gambar, data.nama, data.harga, true),

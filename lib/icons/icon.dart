@@ -67,7 +67,13 @@ class CustomIcon {
   static const Icon cart = Icon(
     FontAwesome.shopping_cart,
     color: Colors.white,
-    size: 35,
+    size: 23,
+  );
+  
+  static const Icon cartAll = Icon(
+    FontAwesome.shopping_cart,
+    color: Colors.white,
+    size: 18,
   );
 
   static const Icon check = Icon(
