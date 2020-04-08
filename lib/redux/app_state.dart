@@ -2,7 +2,7 @@ class AppState {
   String tokenType;
   String token;
   String isLogedIn;
-  int idSepatu;
+  List<int> idSepatu = List<int>();
 
   AppState({this.tokenType, this.token, this.isLogedIn, this.idSepatu});
 

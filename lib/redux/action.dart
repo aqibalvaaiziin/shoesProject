@@ -14,6 +14,6 @@ class IsLogedIn {
 }
 
 class IdSepatu {
-  final int payload;
+  final List<int> payload;
   IdSepatu(this.payload);
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/factory/sepatu_factory.dart';
 import 'package:shoes/icons/icon.dart';
-import 'package:shoes/pages/cart_page.dart';
 import 'package:shoes/pages/detail_page.dart';
-import 'package:shoes/widgets/cart_page/cart_button.dart';
 import 'package:shoes/widgets/main_page/product_card.dart';
 
 class MainPage extends StatefulWidget {
@@ -37,17 +35,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => CartPage(),
-            ),
-          );
-        },
-        child: CartButton(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         elevation: 7,
         automaticallyImplyLeading: false,
