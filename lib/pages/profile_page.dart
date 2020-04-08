@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
     ProfileFactory.setRequest().then((value) {
       setState(() {
         data = value;
-        _data.setIdUser(data.id_user);
+        _data.setIdUser(data.idUser);
       });
       setState(() async {
         id = await _data.getIdUser();

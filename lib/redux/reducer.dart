@@ -10,6 +10,8 @@ AppState reducer(AppState prevState, dynamic action) {
     newState.token = action.payload;
   } else if (action is IsLogedIn) {
     newState.isLogedIn = action.payload;
+  } else if (action is IdSepatu) {
+    newState.idSepatu = action.payload;
   }
 
   return newState;

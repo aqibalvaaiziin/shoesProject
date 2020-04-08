@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/factory/cart_factory.dart';
 import 'package:shoes/widgets/cart_page/card_cart.dart';
 
 class CartPage extends StatefulWidget {
@@ -57,6 +58,15 @@ class _CartPageState extends State<CartPage> {
       total += lala[i]['price'];
     }
     return total;
+  }
+
+  var result = List<CartFactory>();
+
+
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

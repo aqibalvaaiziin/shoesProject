@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class SepatuFactory {
-  int id_sepatu;
+  int idSepatu;
   String nama;
   String tipe;
   int ukuran;
@@ -14,7 +14,7 @@ class SepatuFactory {
   String gambar;
 
   SepatuFactory(
-      {this.id_sepatu,
+      {this.idSepatu,
       this.nama,
       this.tipe,
       this.ukuran,
@@ -26,7 +26,7 @@ class SepatuFactory {
 
   factory SepatuFactory.result(Map<String, dynamic> object) {
     return SepatuFactory(
-      id_sepatu: object['id_sepatu'],
+      idSepatu: object['id_sepatu'],
       nama: object['nama'],
       tipe: object['tipe'],
       ukuran: object['ukuran'],

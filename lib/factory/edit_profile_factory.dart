@@ -5,7 +5,7 @@ class EditProfileFactory {
   EditProfileFactory();
 
   static Future<String> putData(
-    int id_user,
+    int idUser,
     String name,
     String email,
     String password,
@@ -13,7 +13,7 @@ class EditProfileFactory {
     String telp,
     File foto,
   ) async {
-    String url = "https://sepatu.gopla.xyz/user/" + id_user.toString();
+    String url = "https://sepatu.gopla.xyz/user/" + idUser.toString();
     final requestData = http.MultipartRequest('PUT', Uri.parse(url));
     final file = await http.MultipartFile.fromPath('foto', foto.path);
     requestData.fields['nama'] = name;

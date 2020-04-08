@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RetailFactory {
-  String id_retail;
+  String idRetail;
   String nama;
   String lokasi;
   String telp;
 
-  RetailFactory({this.id_retail, this.nama, this.lokasi, this.telp});
+  RetailFactory({this.idRetail, this.nama, this.lokasi, this.telp});
 
   factory RetailFactory.createReseultObject(Map<String, dynamic> object) {
     return RetailFactory(
-      id_retail: object['id_retail'].toString(),
+      idRetail: object['id_retail'].toString(),
       nama: object['nama'],
       lokasi: object['lokasi'],
       telp: object['telp'],

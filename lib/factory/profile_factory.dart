@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shoes/preference/user_preferences.dart';
 
 class ProfileFactory {
-  int id_user;
+  int idUser;
   String name;
   String email;
   String password;
@@ -14,7 +14,7 @@ class ProfileFactory {
   String foto;
 
   ProfileFactory({
-    this.id_user,
+    this.idUser,
     this.name,
     this.email,
     this.password,
@@ -25,7 +25,7 @@ class ProfileFactory {
 
   factory ProfileFactory.getResponse(Map<String, dynamic> object) {
     return ProfileFactory(
-      id_user: object['id_user'],
+      idUser: object['id_user'],
       name: object['nama'],
       email: object['email'],
       password: object['password'],
