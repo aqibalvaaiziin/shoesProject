@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shoes/factory/sepatu_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/cart_page.dart';
 
@@ -10,6 +13,25 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  var result = List<SepatuFactory>();
+  var selectedIndex = 0;
+
+  void dataSepatu() {
+    SepatuFactory.byName(widget.nama).then((value) {
+      for (var i = 0; i < value.length; i++) {
+        setState(() {
+          result.add(value[i]);
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    dataSepatu();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +95,7 @@ class _DetailPageState extends State<DetailPage> {
             child: Container(
               width: MediaQuery.of(context).size.width * 0.6,
               child: Text(
-                "Ozweego Pusha Blue Tiger",
+                result[0].nama,
                 style: TextStyle(
                   fontSize: 25,
                   fontFamily: "F",
@@ -96,7 +118,7 @@ class _DetailPageState extends State<DetailPage> {
                   height: 5,
                 ),
                 Text(
-                  "Rp. 3.000.000",
+                  result[0].harga.toString(),
                   style: TextStyle(
                     fontSize: 25,
                     fontFamily: "AD",
@@ -122,7 +144,7 @@ class _DetailPageState extends State<DetailPage> {
             child: RotationTransition(
               turns: AlwaysStoppedAnimation(-15 / 360),
               child: Image(
-                image: AssetImage("assets/images/ozwmcn.png"),
+                image: MemoryImage(base64Decode(result[0].gambar)),
                 width: 350,
                 height: 350,
               ),
@@ -139,7 +161,7 @@ class _DetailPageState extends State<DetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Ozweego Pusha Blue Tiger ",
+                    result[0].nama,
                     style: TextStyle(
                         fontSize: 25, fontFamily: "F", letterSpacing: 1),
                   ),
@@ -147,7 +169,7 @@ class _DetailPageState extends State<DetailPage> {
                     height: 10,
                   ),
                   Text(
-                    "Sepatu Ozweego Pusha merupakan keluaran baru dari Adidas yang mengangkat tema keagungan dengan motif yang memiliki shape mewah",
+                    result[0].desc,
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   SizedBox(
@@ -156,20 +178,20 @@ class _DetailPageState extends State<DetailPage> {
                   Text(
                     "Details",
                     style: TextStyle(
-                        fontSize: 30, fontFamily: "F", letterSpacing: 1),
+                        fontSize: 25, fontFamily: "F", letterSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "Type      : Ozweego Pusha",
+                    "Type      : " + result[0].tipe,
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   SizedBox(
                     height: 5,
                   ),
                   Text(
-                    "Gender  : Woman",
+                    "Gender  : " + result[0].gender,
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 ],
@@ -179,33 +201,41 @@ class _DetailPageState extends State<DetailPage> {
           Positioned(
             top: 280,
             left: 40,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Ukuran",
-                  style: TextStyle(
-                      fontSize: 22, fontFamily: "FL", letterSpacing: 1),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: 120,
-                  child: Row(
+            child: Text(
+              "Ukuran",
+              style:
+                  TextStyle(fontSize: 22, fontFamily: "FL", letterSpacing: 1),
+            ),
+          ),
+          Positioned(
+            top: 320,
+            left: 40,
+            child: Container(
+              width: 150,
+              height: 40,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: result.length,
+                itemBuilder: (context, index) {
+                  return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       GestureDetector(
                           onTap: () {
-                            print("lala");
+                            setState(() {
+                              selectedIndex = index;
+                              print(selectedIndex);
+                            });
                           },
-                          child: sizeShoes("43", true)),
-                      sizeShoes("44", false),
-                      sizeShoes("45", false),
+                          child: sizeShoes(
+                              result[index].ukuran, selectedIndex == index)),
+                      SizedBox(
+                        width: 5,
+                      )
                     ],
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
           Transform.translate(
@@ -281,7 +311,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 }
 
-Widget sizeShoes(String size, bool selected) {
+Widget sizeShoes(int size, bool selected) {
   return Container(
     width: 35,
     height: 35,
@@ -291,7 +321,7 @@ Widget sizeShoes(String size, bool selected) {
     ),
     child: Center(
         child: Text(
-      size,
+      size.toString(),
       style: TextStyle(
           fontFamily: "D",
           fontWeight: FontWeight.bold,

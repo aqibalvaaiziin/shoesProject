@@ -38,8 +38,8 @@ class SepatuFactory {
     );
   }
 
-    static Future<List<SepatuFactory>> byType(String type) async {
-    String url = "https://sepatu.gopla.xyz/sepatu/group/type/"+type;
+  static Future<List<SepatuFactory>> byType(String type) async {
+    String url = "https://sepatu.gopla.xyz/sepatu/group/type/" + type;
     var apiResult = await http.get(url);
     var jsonObject = json.decode(apiResult.body);
     List<SepatuFactory> dataShoes = [];
@@ -60,6 +60,14 @@ class SepatuFactory {
     return dataShoes;
   }
 
-
-
+  static Future<List<SepatuFactory>> byName(String name) async {
+    String url = "https://sepatu.gopla.xyz/sepatu/group/name/" + name;
+    var apiResult = await http.get(url);
+    var jsonObject = json.decode(apiResult.body);
+    List<SepatuFactory> dataShoes = [];
+    for (var i = 0; i < jsonObject.length; i++) {
+      dataShoes.add(SepatuFactory.result(jsonObject[i]));
+    }
+    return dataShoes;
+  }
 }
