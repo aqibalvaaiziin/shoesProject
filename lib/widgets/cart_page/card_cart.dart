@@ -1,146 +1,168 @@
+import 'dart:convert';
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
-class CardCart extends StatefulWidget {
-  final String name;
-  final String image;
-  final int price;
-
-  CardCart(this.image, this.name, this.price);
+class CartCard extends StatefulWidget {
+  String nama, tipe, gambar;
+  int harga, jumlah;
+  CartCard(this.nama, this.tipe, this.harga, this.jumlah, this.gambar);
   @override
-  _CardCartState createState() => _CardCartState(image, name, price);
+  _CartCardState createState() => _CartCardState();
 }
 
-class _CardCartState extends State<CardCart> {
-  String name, image;
-  int price;
-  _CardCartState(this.image, this.name, this.price);
-  String qty = "Jumlah";
+class _CartCardState extends State<CartCard> {
+  int qty = 1;
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Center(
-          child: Container(
-            margin: EdgeInsets.only(bottom: 70),
-            width: MediaQuery.of(context).size.width * .905,
-            height: 110,
-            decoration: BoxDecoration(
-                color: Color(0X525252522),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(100, 35, 20, 10),
-                  height: 100,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        name,
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: "D",
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Text(
-                        "Rp. " + price.toString(),
-                        style: TextStyle(
-                            fontFamily: "F", fontSize: 17, color: Colors.black),
-                      ),
-                    ],
+    return Center(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 15),
+        width: MediaQuery.of(context).size.width * 0.85,
+        height: 191,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[400],
+                spreadRadius: 1,
+                blurRadius: 7,
+                offset: Offset(0, 7))
+          ],
+        ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    widget.nama,
+                    style: TextStyle(
+                        fontFamily: "FL",
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1),
                   ),
-                ),
-               
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          top: 20.4,
-          left: 10,
-          child: Container(
-            width: 90,
-            height: 90,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 87,
-          left: 20,
-          child: Container(
-            width: 70,
-            height: 7,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black12, blurRadius: 5, spreadRadius: 5),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          top: 25,
-          left: 5,
-          child: Image(
-            width: 95,
-            height: 95,
-            image: AssetImage(image),
-          ),
-        ),
-        Positioned(
-          top: 110,
-          right: 18.5,
-          child: Container(
-            width: 290,
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(1),
-                bottomLeft: Radius.circular(5),
-                bottomRight: Radius.circular(5),
-              ),
-              color: Color(0x73707073),
-            ),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              child: DropdownButton<int>(
-                hint: Text(
-                  qty,
-                  style: TextStyle(
-                    fontFamily: "F",
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
+                  Padding(
+                    padding: EdgeInsets.only(left: 170),
+                    child: Transform(
+                      transform: Matrix4.rotationY(math.pi),
+                      child: Image(
+                        width: 158,
+                        image: MemoryImage(base64Decode(widget.gambar)),
+                      ),
+                    ),
                   ),
-                ),
-                items: <int>[1, 2, 3, 4, 5].map((int value) {
-                  return new DropdownMenuItem<int>(
-                    value: value,
-                    child: new Text(value.toString()),
-                  );
-                }).toList(),
-                onChanged: (newValue) {
-                  setState(() {
-                    qty = newValue.toString();
-                  });
-                },
+                ],
               ),
             ),
-          ),
-        )
-      ],
+            Positioned(
+              top: 50,
+              right: 15,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      widget.tipe,
+                      style: TextStyle(fontFamily: "D", fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Rp. " + widget.harga.toString(),
+                      style: TextStyle(
+                          fontFamily: "D",
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 100,
+                      height: 30,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (qty > 1) {
+                                    qty -= 1;
+                                  }
+                                });
+                              },
+                              splashColor: Colors.grey,
+                              child: Center(
+                                child: Text(
+                                  "-",
+                                  style: TextStyle(
+                                      fontSize: 23,
+                                      fontFamily: "F",
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            qty.toString(),
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontFamily: "F",
+                            ),
+                          ),
+                          Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  qty += 1;
+                                });
+                              },
+                              splashColor: Colors.grey,
+                              child: Center(
+                                child: Text(
+                                  "+",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "F",
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -55,8 +55,12 @@ class CartFactory {
     String type = await _data.getTokenType();
     var apiResult = await http.post(
       api,
-      body: {"id_sepatu": idSepatu, "jumlah": jumlah},
-      headers: {HttpHeaders.authorizationHeader: "$type $token"},
+      body: json.encode({"id_sepatu": idSepatu, "jumlah": jumlah}),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "$type $token"
+      },
     );
     var jsonObject = json.decode(apiResult.body);
     return CartFactory.resultPost(jsonObject);
