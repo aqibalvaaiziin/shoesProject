@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shoes/factory/retail_factory.dart';
 import 'package:shoes/icons/icon.dart';
 
@@ -56,124 +57,128 @@ class _RetailPageState extends State<RetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              print(result);
-            },
-            child: Container(
-              margin: EdgeInsets.fromLTRB(20, 60, 0, 10),
-              child: CustomIcon.back,
-            ),
-          ),
-          Container(
-            child: Center(
-              child: Text(
-                "PILIH RETAIL PENGAMBILAN",
-                style: TextStyle(fontSize: 30, fontFamily: "D"),
-              ),
-            ),
-          ),
-          Center(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 25),
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: 45,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey[200],
-                      offset: Offset(0, 8),
-                      blurRadius: 10),
-                ],
-              ),
-              child: TextField(
-                controller: search,
-                onChanged: (value) {
-                  onSearchTextChanged(value);
-                },
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    suffixIcon: CustomIcon.search,
-                    hintText: "Cari Retail : "),
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: result.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
+      body: result.length == 0
+          ? SpinKitFadingCube(
+              size: 50,
+              color: Colors.grey,
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                GestureDetector(
                   onTap: () {},
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: 80,
+                    margin: EdgeInsets.fromLTRB(20, 60, 0, 10),
+                    child: CustomIcon.back,
+                  ),
+                ),
+                Container(
+                  child: Center(
+                    child: Text(
+                      "PILIH RETAIL PENGAMBILAN",
+                      style: TextStyle(fontSize: 30, fontFamily: "D"),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 25),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 45,
                     decoration: BoxDecoration(
                       color: Colors.white,
+                      border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey[300],
-                            blurRadius: 8,
-                            spreadRadius: 2,
-                            offset: Offset(5, 8)),
+                            color: Colors.grey[200],
+                            offset: Offset(0, 8),
+                            blurRadius: 10),
                       ],
                     ),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.store_mall_directory,
-                          size: 70,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    child: TextField(
+                      controller: search,
+                      onChanged: (value) {
+                        onSearchTextChanged(value);
+                      },
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          suffixIcon: CustomIcon.search,
+                          hintText: "Cari Retail : "),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: result.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey[300],
+                                  blurRadius: 8,
+                                  spreadRadius: 2,
+                                  offset: Offset(5, 8)),
+                            ],
+                          ),
+                          child: Row(
                             children: <Widget>[
-                              Text(
-                                result[index].nama,
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontFamily: "D",
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Icon(
+                                Icons.store_mall_directory,
+                                size: 70,
                               ),
-                              Text(
-                                result[index].telp,
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: "FL",
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                result[index].lokasi,
-                                style: TextStyle(
-                                  fontFamily: "FL",
-                                  fontSize: 13,
-                                  color: Colors.grey,
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      result[index].nama,
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontFamily: "D",
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      result[index].telp,
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "FL",
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text(
+                                      result[index].lokasi,
+                                      style: TextStyle(
+                                        fontFamily: "FL",
+                                        fontSize: 13,
+                                        color: Colors.grey,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               )
                             ],
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

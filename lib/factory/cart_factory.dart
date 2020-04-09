@@ -62,7 +62,8 @@ class CartFactory {
         "Authorization": "$type $token"
       },
     );
-    var jsonObject = json.decode(apiResult.body);
+    var jsonObject = json.
+    decode(apiResult.body);
     return CartFactory.resultPost(jsonObject);
   }
 }

@@ -85,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextField(
                           controller: password,
+                          obscureText: true,
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.vpn_key,

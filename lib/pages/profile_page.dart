@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shoes/pages/edit_profile_page.dart';
 import 'package:shoes/redux/app_state.dart';
 import 'package:shoes/widgets/MyApp/tile.dart';
@@ -93,40 +94,45 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Center(
-                  child: Stack(
+          body: data == null
+              ? SpinKitFadingCube(
+                  size: 50,
+                  color: Colors.grey,
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(top: 40),
-                        width: 180,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: MemoryImage(base64Decode(data.foto)),
-                          ),
+                      Center(
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(top: 40),
+                              width: 180,
+                              height: 180,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: MemoryImage(base64Decode(data.foto)),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Profile(
+                        data.name,
+                        data.email,
+                        data.alamat,
+                        data.telp,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 50,
-                ),
-                Profile(
-                  data.name,
-                  data.email,
-                  data.alamat,
-                  data.telp,
-                ),
-              ],
-            ),
-          ),
         );
       },
     );

@@ -33,6 +33,7 @@ dependencies:
   image: any
   path: any
   mime: ^0.9.6+3
+  flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
   flutter_test:
@@ -73,30 +74,30 @@ flutter:
 
     - family: A
       fonts:
-        - asset: assets/fonts/Arsinoe-DEMO.ttf
+        - asset: assets/fonts/A.ttf
 
     - family: F
       fonts:
-        - asset: assets/fonts/futura.ttf
+        - asset: assets/fonts/F.ttf
     
     - family: FL
       fonts:
-        - asset: assets/fonts/FuturaLight.ttf
+        - asset: assets/fonts/FL.ttf
     
     - family: D
       fonts:
-        - asset: assets/fonts/D-DINCondensed.otf
+        - asset: assets/fonts/D.otf
     
     - family: "AD"
       fonts:
-        - asset: assets/fonts/ITCAvantGardeStd-Demi.otf
+        - asset: assets/fonts/AD.otf
     
     - family: "M"
       fonts:
-        - asset: assets\fonts\ms.otf
+        - asset: assets/fonts/MS.otf
     
     - family: "CB"
       fonts:
-        - asset: assets\fonts\Campton-BoldDEMO.otf
+        - asset: assets/fonts/CB.otf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

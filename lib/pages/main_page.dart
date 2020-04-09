@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shoes/factory/sepatu_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/detail_page.dart';
@@ -54,53 +55,59 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       backgroundColor: Color(0xFFf4f6fb),
-      body: ListView(
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(top: 15),
-                  child: Text(
-                    result.length.toString() + " Result for this type",
-                    style: TextStyle(fontSize: 20, fontFamily: "FL"),
-                  ),
+      body: result.length == 0
+          ? SpinKitFadingCube(
+              size: 50,
+              color: Colors.grey,
+            )
+          : ListView(
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: Text(
+                          result.length.toString() + " Result for this type",
+                          style: TextStyle(fontSize: 20, fontFamily: "FL"),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 10),
+                        width: MediaQuery.of(context).size.width - 60,
+                        height: 2,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: Wrap(
+                        children: result.map((data) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                name = data.nama;
+                              });
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailPage(nama: name)));
+                            },
+                            child: CardProducts(
+                                data.gambar, data.nama, data.harga, true),
+                          );
+                        }).toList(),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width - 60,
-                  height: 2,
-                  color: Colors.grey[300],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Wrap(
-                  children: result.map((data) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          name = data.nama;
-                        });
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DetailPage(nama: name)));
-                      },
-                      child: CardProducts(
-                          data.gambar, data.nama, data.harga, true),
-                    );
-                  }).toList(),
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
+              ],
+            ),
     );
   }
 }

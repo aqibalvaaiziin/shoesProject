@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shoes/factory/sepatu_factory.dart';
 import 'package:shoes/widgets/favourite_page/card_brand.dart';
 
@@ -39,25 +40,30 @@ class _FavouritePageState extends State<FavouritePage> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: result.length,
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 10,
-              ),
-              CardBrand(
-                result[index].nama,
-                result[index].desc,
-                result[index].gambar,
-                result[index].harga,
-              ),
-            ],
-          );
-        },
-      ),
+      body: result.length == 0
+          ? SpinKitFadingCube(
+              size: 50,
+              color: Colors.grey,
+            )
+          : ListView.builder(
+              itemCount: result.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CardBrand(
+                      result[index].nama,
+                      result[index].desc,
+                      result[index].gambar,
+                      result[index].harga,
+                    ),
+                  ],
+                );
+              },
+            ),
     );
   }
 }

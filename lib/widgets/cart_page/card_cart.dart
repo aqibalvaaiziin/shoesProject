@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 
 class CartCard extends StatefulWidget {
   String nama, tipe, gambar;
-  int harga, jumlah;
-  CartCard(this.nama, this.tipe, this.harga, this.jumlah, this.gambar);
+  int harga, jumlah, ukuran;
+  CartCard(
+      this.nama, this.tipe, this.harga, this.jumlah, this.ukuran, this.gambar);
   @override
   _CartCardState createState() => _CartCardState();
 }
 
 class _CartCardState extends State<CartCard> {
-  int qty = 1;
+  int qty = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,13 @@ class _CartCardState extends State<CartCard> {
                       height: 10,
                     ),
                     Text(
+                      "Size " +widget.ukuran.toString(),
+                      style: TextStyle(fontFamily: "D", fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
                       "Rp. " + widget.harga.toString(),
                       style: TextStyle(
                           fontFamily: "D",
@@ -102,8 +110,8 @@ class _CartCardState extends State<CartCard> {
                             child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  if (qty > 1) {
-                                    qty -= 1;
+                                  if (widget.jumlah > 1) {
+                                    widget.jumlah -= 1;
                                   }
                                 });
                               },
@@ -120,7 +128,7 @@ class _CartCardState extends State<CartCard> {
                             ),
                           ),
                           Text(
-                            qty.toString(),
+                            widget.jumlah.toString(),
                             style: TextStyle(
                               fontSize: 17,
                               fontFamily: "F",
@@ -138,7 +146,7 @@ class _CartCardState extends State<CartCard> {
                             child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  qty += 1;
+                                  widget.jumlah += 1;
                                 });
                               },
                               splashColor: Colors.grey,
