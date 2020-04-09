@@ -13,7 +13,12 @@ class IsLogedIn {
   IsLogedIn(this.payload);
 }
 
-class IdSepatu {
-  final List<int> payload;
-  IdSepatu(this.payload);
+class DataLengthItem {
+  final int payload;
+  DataLengthItem(this.payload);
+}
+
+class DataTotal {
+  final int payload;
+  DataTotal(this.payload);
 }

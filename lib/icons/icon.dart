@@ -62,6 +62,12 @@ class CustomIcon {
     color: Colors.red,
     size: 70,
   );
+
+  static const Icon removeItem = Icon(
+    FontAwesome.times,
+    color: Colors.white,
+    size: 15,
+  );
   static const Icon profileUser = Icon(FontAwesome.user_circle);
 
   static const Icon cart = Icon(
@@ -69,7 +75,7 @@ class CustomIcon {
     color: Colors.white,
     size: 23,
   );
-  
+
   static const Icon cartAll = Icon(
     FontAwesome.shopping_cart,
     color: Colors.white,

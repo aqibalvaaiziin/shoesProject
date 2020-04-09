@@ -2,14 +2,20 @@ class AppState {
   String tokenType;
   String token;
   String isLogedIn;
-  List<int> idSepatu = List<int>();
-
-  AppState({this.tokenType, this.token, this.isLogedIn, this.idSepatu});
+  int dataLengthItem;
+  int dataTotal;
+  AppState(
+      {this.tokenType,
+      this.token,
+      this.isLogedIn,
+      this.dataLengthItem,
+      this.dataTotal});
 
   AppState.fromAppState(AppState another) {
     tokenType = another.tokenType;
     token = another.token;
     isLogedIn = another.isLogedIn;
-    idSepatu = another.idSepatu;
+    dataLengthItem = another.dataLengthItem;
+    dataTotal = another.dataTotal;
   }
 }
