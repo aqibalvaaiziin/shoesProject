@@ -1,9 +1,11 @@
+
 class AppState {
   String tokenType;
   String token;
   String isLogedIn;
   int dataLengthItem;
   int dataTotal;
+
   AppState(
       {this.tokenType,
       this.token,

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RetailFactory {
-  String idRetail;
+  int idRetail;
   String nama;
   String lokasi;
   String telp;
@@ -12,7 +12,7 @@ class RetailFactory {
 
   factory RetailFactory.createReseultObject(Map<String, dynamic> object) {
     return RetailFactory(
-      idRetail: object['id_retail'].toString(),
+      idRetail: object['id_retail'],
       nama: object['nama'],
       lokasi: object['lokasi'],
       telp: object['telp'],

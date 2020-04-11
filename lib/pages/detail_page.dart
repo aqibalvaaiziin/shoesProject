@@ -1,12 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shoes/factory/cart_factory.dart';
 import 'package:shoes/factory/sepatu_factory.dart';
 import 'package:shoes/icons/icon.dart';
 import 'package:shoes/pages/cart_page.dart';
+import 'package:shoes/preference/transaction_preferences.dart';
 
 class DetailPage extends StatefulWidget {
   final String nama;
@@ -20,6 +21,42 @@ class _DetailPageState extends State<DetailPage> {
   var selectedIndex;
   int dataIdSepatu = 0;
   CartFactory dataCart;
+  TransactionPreferences _data = TransactionPreferences();
+  int itemlength = 0;
+  bool animation = false;
+
+  int dataLengthItem() {
+    int data = 0;
+    CartFactory.getData().then((value) {
+      for (var i = 0; i < value.length; i++) {
+        setState(() {
+          data += value[i].jumlah;
+        });
+      }
+      print(value.length);
+      print("data1 : $data");
+      _data.setItemsTransaction(data);
+      _data.getItemsTransaction().then((value) {
+        itemlength = value;
+      });
+    });
+    return data;
+  }
+
+  int dataTransaction() {
+    int data = 0;
+    CartFactory.getData().then((value) {
+      for (var i = 0; i < value.length; i++) {
+        setState(() {
+          data += value[i].jumlah * value[i].sepatu['harga'];
+        });
+      }
+      print(value.length);
+      print("data1 : $data");
+      _data.setTotalTransaction(data);
+    });
+    return data;
+  }
 
   void dataSepatu() {
     SepatuFactory.byName(widget.nama).then((value) {
@@ -31,9 +68,14 @@ class _DetailPageState extends State<DetailPage> {
     });
   }
 
+  void initLength() async {
+    itemlength = await _data.getItemsTransaction();
+  }
+
   @override
   void initState() {
     dataSepatu();
+    initLength();
     super.initState();
   }
 
@@ -269,7 +311,7 @@ class _DetailPageState extends State<DetailPage> {
                                         color: Colors.white),
                                     child: Center(
                                       child: Text(
-                                        "8",
+                                        itemlength.toString(),
                                         style: TextStyle(
                                             fontSize: 10, fontFamily: "F"),
                                       ),
@@ -289,50 +331,40 @@ class _DetailPageState extends State<DetailPage> {
                   child: GestureDetector(
                     onTap: () {
                       if (dataIdSepatu == 0) {
-                        Alert(
-                            content: CustomIcon.remove,
-                            context: context,
-                            style: AlertStyle(
-                                backgroundColor: Colors.grey[200],
-                                animationDuration: Duration(milliseconds: 600),
-                                animationType: AnimationType.grow,
-                                titleStyle: TextStyle(
-                                  fontSize: 23,
-                                  fontFamily: "D",
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                isCloseButton: false,
-                                isOverlayTapDismiss: true,
-                                overlayColor: Colors.black87),
-                            title: "Pilih Ukuran terlebih dahulu!!!",
-                            buttons: [
-                              DialogButton(
-                                  child: Text("Kembali!"),
-                                  onPressed: () {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop();
-                                  })
-                            ]).show();
+                        Fluttertoast.showToast(
+                            msg: "Pilih Ukuran Terlebih Dahulu!",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
                       } else {
                         CartFactory.postData(dataIdSepatu, 1).then((value) {
                           dataCart = value;
                         });
-                        Alert(
-                          content: CustomIcon.check,
-                          context: context,
-                          style: AlertStyle(
-                              backgroundColor: Colors.grey[200],
-                              animationDuration: Duration(milliseconds: 600),
-                              animationType: AnimationType.grow,
-                              titleStyle: TextStyle(
-                                fontSize: 23,
-                                fontFamily: "D",
-                                fontWeight: FontWeight.w700,
-                              ),
-                              isCloseButton: false,
-                              overlayColor: Colors.black87),
-                          title: "Barang Telah Ditambahkan",
-                        ).show();
+                        Fluttertoast.showToast(
+                          msg: "Barang Sedang diproses......",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 3,
+                          backgroundColor: Colors.blueAccent,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                        Timer(Duration(seconds: 3), () {
+                          Fluttertoast.showToast(
+                            msg: "Barang Masuk Keranjang !!!",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          dataTransaction();
+                          dataLengthItem();
+                        });
                       }
                     },
                     child: Container(

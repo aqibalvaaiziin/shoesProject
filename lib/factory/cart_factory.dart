@@ -53,8 +53,8 @@ class CartFactory {
     String api = "https://sepatu.gopla.xyz/keranjang/" + idSepatu.toString();
     String token = await _data.getTokenCode();
     String type = await _data.getTokenType();
-    await http
-        .get(api, headers: {HttpHeaders.authorizationHeader: "$type $token"});
+    await http.delete(api,
+        headers: {HttpHeaders.authorizationHeader: "$type $token"});
   }
 
   static Future<CartFactory> postData(int idSepatu, int jumlah) async {
@@ -89,5 +89,23 @@ class CartFactory {
         "Authorization": "$type $token"
       },
     );
+  }
+
+  static Future<CartFactory> checkOut(int idSepatu, int jumlah) async {
+    UserPreferences _data = UserPreferences();
+    String api = "https://sepatu.gopla.xyz/transaksi/";
+    String token = await _data.getTokenCode();
+    String type = await _data.getTokenType();
+    var apiResult = await http.post(
+      api,
+      body: json.encode({"id_sepatu": idSepatu, "jumlah": jumlah}),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "$type $token"
+      },
+    );
+    var jsonObject = json.decode(apiResult.body);
+    return CartFactory.resultPost(jsonObject);
   }
 }

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shoes/factory/retail_factory.dart';
+import 'package:shoes/factory/transaction.dart';
 import 'package:shoes/icons/icon.dart';
+import 'package:shoes/pages/MyApp.dart';
+import 'package:shoes/preference/transaction_preferences.dart';
 
 class RetailPage extends StatefulWidget {
+  String idTransaksi;
+  RetailPage({this.idTransaksi});
   @override
   _RetailPageState createState() => _RetailPageState();
 }
@@ -12,6 +18,7 @@ class _RetailPageState extends State<RetailPage> {
   TextEditingController search = TextEditingController();
   var result = List<RetailFactory>();
   var temp = List<RetailFactory>();
+  TransactionPreferences _trans = TransactionPreferences();
 
   void dataRetail() {
     RetailFactory.getRetail().then((value) {
@@ -27,6 +34,7 @@ class _RetailPageState extends State<RetailPage> {
   @override
   void initState() {
     dataRetail();
+    print(widget.idTransaksi);
     super.initState();
   }
 
@@ -66,7 +74,9 @@ class _RetailPageState extends State<RetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
                   child: Container(
                     margin: EdgeInsets.fromLTRB(20, 60, 0, 10),
                     child: CustomIcon.back,
@@ -114,7 +124,73 @@ class _RetailPageState extends State<RetailPage> {
                     itemCount: result.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Alert(
+                            content: CustomIcon.question,
+                            context: context,
+                            style: AlertStyle(
+                                backgroundColor: Colors.grey[200],
+                                animationDuration: Duration(milliseconds: 600),
+                                animationType: AnimationType.grow,
+                                titleStyle: TextStyle(
+                                  fontSize: 23,
+                                  fontFamily: "D",
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                isCloseButton: false,
+                                overlayColor: Colors.black87),
+                            title: "Pengambilan Sepatu di " +
+                                result[index].nama +
+                                " ?",
+                            buttons: [
+                              DialogButton(
+                                  child: Text("Tidak"),
+                                  onPressed: () => Navigator.pop(context)),
+                              DialogButton(
+                                child: Text("Ya"),
+                                onPressed: () async {
+                                  await TransactionFactory.putTransaction(
+                                      widget.idTransaksi,
+                                      result[index].idRetail);
+                                  Alert(
+                                    content: CustomIcon.check,
+                                    context: context,
+                                    style: AlertStyle(
+                                        backgroundColor: Colors.grey[200],
+                                        animationDuration:
+                                            Duration(milliseconds: 600),
+                                        animationType: AnimationType.grow,
+                                        titleStyle: TextStyle(
+                                          fontSize: 23,
+                                          fontFamily: "D",
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        isCloseButton: false,
+                                        overlayColor: Colors.black87),
+                                    title: "Transaksi Berhasil!",
+                                    buttons: [
+                                      DialogButton(
+                                        child: Text("Kembali Belanja"),
+                                        onPressed: () {
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          MyApp()),
+                                                  (Route<dynamic> route) =>
+                                                      false);
+                                          _trans.setItemsTransaction(0);
+                                          _trans.setTotalTransaction(0);
+                                        },
+                                      )
+                                    ],
+                                  ).show();
+                                },
+                              )
+                            ],
+                          ).show();
+                        },
                         child: Container(
                           margin: EdgeInsets.fromLTRB(25, 0, 25, 30),
                           padding: EdgeInsets.symmetric(horizontal: 10),

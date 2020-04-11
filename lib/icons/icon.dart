@@ -63,6 +63,12 @@ class CustomIcon {
     size: 70,
   );
 
+  static const Icon trash = Icon(
+    FontAwesome.trash_o,
+    color: Colors.red,
+    size: 70,
+  );
+
   static const Icon removeItem = Icon(
     FontAwesome.times,
     color: Colors.white,
@@ -86,5 +92,11 @@ class CustomIcon {
     FontAwesome.check_circle_o,
     size: 70,
     color: Colors.green,
+  );
+
+  static const Icon question = Icon(
+    FontAwesome.question_circle_o,
+    size: 70,
+    color: Colors.black,
   );
 }
