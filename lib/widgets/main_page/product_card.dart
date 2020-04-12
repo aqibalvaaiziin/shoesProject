@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:shoes/icons/icon.dart';
 
 class CardProducts extends StatelessWidget {
@@ -11,6 +12,16 @@ class CardProducts extends StatelessWidget {
   CardProducts(this.image, this.name, this.price, this.isFav);
   @override
   Widget build(BuildContext context) {
+
+    FlutterMoneyFormatter fmf2 = new FlutterMoneyFormatter(
+      amount: price.toDouble(),
+      settings: MoneyFormatterSettings(
+          symbol: 'Rp.',
+          thousandSeparator: '.',
+          symbolAndNumberSeparator: ' ',
+          compactFormatType: CompactFormatType.short),
+    );
+    
     return Stack(
       children: <Widget>[
         Container(
@@ -86,7 +97,7 @@ class CardProducts extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  "Rp. " + price.toString(),
+                  fmf2.output.symbolOnLeft.toString(),
                   style: TextStyle(fontFamily: "F", fontSize: 14),
                 ),
               ],

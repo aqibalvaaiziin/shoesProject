@@ -47,7 +47,6 @@ class ProfileFactory {
     );
     var jsonObject = json.decode(apiResult.body);
     var result = (jsonObject as Map<String, dynamic>)['data'];
-    print(result);
     return ProfileFactory.getResponse(result);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shoes/factory/cart_factory.dart';
@@ -19,6 +20,9 @@ class _CartPageState extends State<CartPage> {
   TransactionPreferences _data = TransactionPreferences();
   int itemLength = 0;
   int total = 0;
+
+  FlutterMoneyFormatter fmf2;
+
   void dataCart() {
     CartFactory.getData().then((value) {
       for (var i = 0; i < value.length; i++) {
@@ -37,8 +41,6 @@ class _CartPageState extends State<CartPage> {
           data += value[i].jumlah;
         });
       }
-      print(value.length);
-      print("data1 : $data");
       _data.setItemsTransaction(data);
       _data.getItemsTransaction().then((value) {
         itemLength = value;
@@ -55,11 +57,17 @@ class _CartPageState extends State<CartPage> {
           data += value[i].jumlah * value[i].sepatu['harga'];
         });
       }
-      print(value.length);
-      print("data1 : $data");
       _data.setTotalTransaction(data);
       _data.getTotalTransaction().then((value) {
         total = value;
+        fmf2 = new FlutterMoneyFormatter(
+          amount: total.toDouble(),
+          settings: MoneyFormatterSettings(
+              symbol: 'Rp.',
+              thousandSeparator: '.',
+              symbolAndNumberSeparator: ' ',
+              compactFormatType: CompactFormatType.short),
+        );
       });
     });
     return data;
@@ -88,9 +96,11 @@ class _CartPageState extends State<CartPage> {
       ),
       backgroundColor: Colors.grey[100],
       body: result.length == 0
-          ? SpinKitFadingCube(
-              size: 50,
-              color: Colors.grey,
+          ? Center(
+              child: Text(
+                "Keranjang Kosong",
+                style: TextStyle(fontFamily: "F", fontSize: 30),
+              ),
             )
           : Column(
               children: <Widget>[
@@ -103,50 +113,22 @@ class _CartPageState extends State<CartPage> {
                       return Stack(
                         children: <Widget>[
                           CartCard(
-                              result[index].idSepatu,
-                              result[index].sepatu['nama'],
-                              result[index].sepatu['tipe'],
-                              result[index].sepatu['harga'],
-                              result[index].jumlah,
-                              result[index].sepatu['ukuran'],
-                              result[index].sepatu['gambar']),
+                            result[index].idSepatu,
+                            result[index].sepatu['nama'],
+                            result[index].sepatu['tipe'],
+                            result[index].sepatu['harga'],
+                            result[index].jumlah,
+                            result[index].sepatu['ukuran'],
+                            result[index].sepatu['gambar'],
+                          ),
                           Transform.translate(
                             offset: Offset(250, 60),
                             child: Container(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
-                                  Text(
-                                    result[index].sepatu['tipe'],
-                                    style: TextStyle(
-                                        fontFamily: "D", fontSize: 17),
-                                  ),
                                   SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Size " +
-                                        result[index]
-                                            .sepatu['ukuran']
-                                            .toString(),
-                                    style: TextStyle(
-                                        fontFamily: "D", fontSize: 17),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Rp. " +
-                                        result[index]
-                                            .sepatu['harga']
-                                            .toString(),
-                                    style: TextStyle(
-                                        fontFamily: "D",
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
+                                    height: 90,
                                   ),
                                   Container(
                                     width: 90,
@@ -329,7 +311,7 @@ class _CartPageState extends State<CartPage> {
                                   color: Colors.grey),
                             ),
                             Text(
-                              "Rp. " + total.toString(),
+                              fmf2.output.symbolOnLeft.toString(),
                               style: TextStyle(
                                   fontSize: 21,
                                   fontFamily: "M",
@@ -349,7 +331,7 @@ class _CartPageState extends State<CartPage> {
                               style: TextStyle(fontSize: 20, fontFamily: "F"),
                             ),
                             Text(
-                              "Rp. " + total.toString(),
+                              fmf2.output.symbolOnLeft.toString(),
                               style: TextStyle(fontSize: 21, fontFamily: "F"),
                             )
                           ],

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shoes/factory/cart_factory.dart';
@@ -24,6 +25,9 @@ class _DetailPageState extends State<DetailPage> {
   TransactionPreferences _data = TransactionPreferences();
   int itemlength = 0;
   bool animation = false;
+  static int price;
+
+  FlutterMoneyFormatter fmf;
 
   int dataLengthItem() {
     int data = 0;
@@ -33,8 +37,6 @@ class _DetailPageState extends State<DetailPage> {
           data += value[i].jumlah;
         });
       }
-      print(value.length);
-      print("data1 : $data");
       _data.setItemsTransaction(data);
       _data.getItemsTransaction().then((value) {
         itemlength = value;
@@ -51,8 +53,6 @@ class _DetailPageState extends State<DetailPage> {
           data += value[i].jumlah * value[i].sepatu['harga'];
         });
       }
-      print(value.length);
-      print("data1 : $data");
       _data.setTotalTransaction(data);
     });
     return data;
@@ -65,6 +65,15 @@ class _DetailPageState extends State<DetailPage> {
           result.add(value[i]);
         });
       }
+      price = result[0].harga;
+      fmf = new FlutterMoneyFormatter(
+        amount: price.toDouble(),
+        settings: MoneyFormatterSettings(
+            symbol: 'Rp.',
+            thousandSeparator: '.',
+            symbolAndNumberSeparator: ' ',
+            compactFormatType: CompactFormatType.short),
+      );
     });
   }
 
@@ -123,7 +132,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
                 Positioned(
-                  top: 200,
+                  top: 190,
                   left: 40,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,10 +143,10 @@ class _DetailPageState extends State<DetailPage> {
                             fontSize: 22, fontFamily: "FL", letterSpacing: 1),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       Text(
-                        result[0].harga.toString(),
+                        fmf.output.symbolOnLeft.toString(),
                         style: TextStyle(
                           fontSize: 25,
                           fontFamily: "AD",

@@ -25,11 +25,14 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         data = value;
         _data.setIdUser(data.idUser);
-      });
-      setState(() async {
-        id = await _data.getIdUser();
+        getIdUser();
       });
     });
+  }
+
+  void getIdUser() async {
+    id = await _data.getIdUser();
+    print(id);
   }
 
   @override

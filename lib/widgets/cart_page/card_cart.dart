@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:shoes/factory/cart_factory.dart';
 
 class CartCard extends StatefulWidget {
   String nama, tipe, gambar;
-  int idSepatu, harga, jumlah, ukuran;
+  int idSepatu, jumlah, ukuran;
+  int harga;
   CartCard(this.idSepatu, this.nama, this.tipe, this.harga, this.jumlah,
       this.ukuran, this.gambar);
   @override
@@ -16,7 +18,6 @@ class CartCard extends StatefulWidget {
 class _CartCardState extends State<CartCard> {
   int qty = 0;
   var result = List<CartFactory>();
- 
 
   @override
   void initState() {
@@ -25,6 +26,16 @@ class _CartCardState extends State<CartCard> {
 
   @override
   Widget build(BuildContext context) {
+    int lala = widget.harga;
+
+    FlutterMoneyFormatter fmf2 = new FlutterMoneyFormatter(
+      amount: lala.toDouble(),
+      settings: MoneyFormatterSettings(
+          symbol: 'Rp.',
+          thousandSeparator: '.',
+          symbolAndNumberSeparator: ' ',
+          compactFormatType: CompactFormatType.short),
+    );
     return Center(
         child: Container(
       margin: EdgeInsets.symmetric(vertical: 15),
@@ -83,6 +94,35 @@ class _CartCardState extends State<CartCard> {
               ],
             ),
           ),
+          Positioned(
+              top: 40,
+              right: 25,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    widget.tipe,
+                    style: TextStyle(fontFamily: "D", fontSize: 17),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Size " + widget.ukuran.toString(),
+                    style: TextStyle(fontFamily: "D", fontSize: 17),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    fmf2.output.symbolOnLeft.toString(),
+                    style: TextStyle(
+                        fontFamily: "D",
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ))
         ],
       ),
     ));

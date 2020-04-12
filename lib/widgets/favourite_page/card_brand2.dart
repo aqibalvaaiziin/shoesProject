@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
-import 'package:shoes/widgets/favourite_page/top_brand.dart';
+import 'package:shoes/widgets/favourite_page/top_brand2.dart';
 
-class CardBrand extends StatelessWidget {
+class CardBrand2 extends StatelessWidget {
   String name;
   String desc;
   String image;
   int price;
-  CardBrand(String dataName, String dataDesc, String dataImage, int price) {
+  CardBrand2(String dataName, String dataDesc, String dataImage, int price) {
     this.name = dataName;
     this.desc = dataDesc;
     this.image = dataImage;
@@ -44,7 +44,6 @@ class CardBrand extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              TwoShoes(image),
               Container(
                 width: 200,
                 padding: EdgeInsets.symmetric(vertical: 30),
@@ -68,7 +67,7 @@ class CardBrand extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: EdgeInsets.only(left: 10),
                           height: 85,
                           child: RichText(
                             textAlign: TextAlign.justify,
@@ -90,7 +89,7 @@ class CardBrand extends StatelessWidget {
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.only(right: 10),
+                          padding: EdgeInsets.only(left: 10),
                           child: Text(
                             fmf2.output.symbolOnLeft.toString(),
                             style: TextStyle(
@@ -98,14 +97,15 @@ class CardBrand extends StatelessWidget {
                                 fontFamily: "AD",
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1),
-                            textAlign: TextAlign.right,
+                            textAlign: TextAlign.left,
                           ),
                         )
                       ],
                     ),
                   ],
                 ),
-              )
+              ),
+              TwoShoes2(image),
             ],
           ),
         ),

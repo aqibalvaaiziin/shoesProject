@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 class CustomIcon {
   static const Icon slider = Icon(FontAwesome.sliders);
   static const Icon bag = Icon(FontAwesome.shopping_bag, color: Colors.black);
+  static const Icon bagW = Icon(FontAwesome.shopping_bag, color: Colors.white);
   static const Icon search = Icon(
     FontAwesome.search,
     size: 20,
@@ -91,6 +92,12 @@ class CustomIcon {
   static const Icon check = Icon(
     FontAwesome.check_circle_o,
     size: 70,
+    color: Colors.green,
+  );
+
+  static const Icon warning = Icon(
+    FontAwesome5Solid.user_clock,
+    size: 60,
     color: Colors.green,
   );
 
