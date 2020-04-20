@@ -41,6 +41,57 @@ class _EditProfilePageState extends State<EditProfilePage> {
       isError = false;
     else
       isError = true;
+
+    isError
+        ? Alert(
+            content: CustomIcon.check,
+            context: context,
+            style: AlertStyle(
+                backgroundColor: Colors.grey[200],
+                animationDuration: Duration(milliseconds: 600),
+                animationType: AnimationType.grow,
+                titleStyle: TextStyle(
+                  fontSize: 23,
+                  fontFamily: "D",
+                  fontWeight: FontWeight.w700,
+                ),
+                isCloseButton: false,
+                overlayColor: Colors.black87),
+            title: "Update Berhasil",
+            buttons: [
+                DialogButton(
+                    width: 150,
+                    color: Color(0xaa18c5f5),
+                    child: Text(
+                      "Kembali ke toko ?",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontFamily: "D",
+                          fontWeight: FontWeight.w500),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context, rootNavigator: true)
+                          .pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (context) => MyApp()),
+                              (Route<dynamic> route) => false);
+                    }),
+              ]).show()
+        : Alert(
+            context: context,
+            content: CustomIcon.remove,
+            style: AlertStyle(
+                backgroundColor: Colors.grey[200],
+                animationDuration: Duration(milliseconds: 600),
+                animationType: AnimationType.grow,
+                titleStyle: TextStyle(
+                  fontSize: 23,
+                  fontFamily: "FL",
+                  fontWeight: FontWeight.bold,
+                ),
+                isCloseButton: false,
+                overlayColor: Colors.black87),
+            title: "Gagal mengubah profile",
+          ).show();
   }
 
   void open_camera() async {
@@ -48,6 +99,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     setState(() {
       _image = image;
     });
+    Navigator.of(context, rootNavigator: true).pop();
   }
 
   void open_gallery() async {
@@ -55,6 +107,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     setState(() {
       _image = image;
     });
+    Navigator.of(context, rootNavigator: true).pop();
   }
 
   @override
@@ -196,66 +249,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     onTap: () {
                                       _dataSend();
                                       setState(() {});
-                                      isError
-                                          ? Alert(
-                                              content: CustomIcon.check,
-                                              context: context,
-                                              style: AlertStyle(
-                                                  backgroundColor:
-                                                      Colors.grey[200],
-                                                  animationDuration: Duration(
-                                                      milliseconds: 600),
-                                                  animationType:
-                                                      AnimationType.grow,
-                                                  titleStyle: TextStyle(
-                                                    fontSize: 23,
-                                                    fontFamily: "D",
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                  isCloseButton: false,
-                                                  overlayColor: Colors.black87),
-                                              title: "Update Berhasil",
-                                              buttons: [
-                                                  DialogButton(
-                                                      width: 150,
-                                                      color: Color(0xaa18c5f5),
-                                                      child: Text(
-                                                        "Kembali ke toko ?",
-                                                        style: TextStyle(
-                                                            fontSize: 17,
-                                                            fontFamily: "D",
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
-                                                      onPressed: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        MyApp()));
-                                                      }),
-                                                ]).show()
-                                          : Alert(
-                                              context: context,
-                                              content: CustomIcon.remove,
-                                              style: AlertStyle(
-                                                  backgroundColor:
-                                                      Colors.grey[200],
-                                                  animationDuration: Duration(
-                                                      milliseconds: 600),
-                                                  animationType:
-                                                      AnimationType.grow,
-                                                  titleStyle: TextStyle(
-                                                    fontSize: 23,
-                                                    fontFamily: "FL",
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                  isCloseButton: false,
-                                                  overlayColor: Colors.black87),
-                                              title: "Gagal mengubah profile",
-                                            ).show();
                                     },
                                     child: Text(
                                       "SIMPAN",
@@ -341,37 +334,5 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ],
       ),
     );
-  }
-
-  Widget message(String message1, String message2, Widget icon) {
-    Alert(
-        content: icon,
-        context: context,
-        style: AlertStyle(
-            backgroundColor: Colors.grey[200],
-            animationDuration: Duration(milliseconds: 600),
-            animationType: AnimationType.grow,
-            titleStyle: TextStyle(
-              fontSize: 23,
-              fontFamily: "D",
-              fontWeight: FontWeight.w700,
-            ),
-            isCloseButton: false,
-            overlayColor: Colors.black87),
-        title: message1,
-        buttons: [
-          DialogButton(
-              width: 210,
-              color: Color(0xaa18c5f5),
-              child: Text(
-                message2,
-                style: TextStyle(
-                    fontSize: 17, fontFamily: "D", fontWeight: FontWeight.w500),
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => MyApp()));
-              }),
-        ]).show();
   }
 }
