@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomTile extends StatelessWidget {
-  IconData icon;
-  String title;
+  final IconData icon;
+  final String title;
   CustomTile(this.icon, this.title);
   @override
   Widget build(BuildContext context) {

@@ -15,6 +15,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   TextEditingController search = TextEditingController();
   var result = List<SepatuFactory>();
+  var temp = List<SepatuFactory>();
   String name;
 
   void dataShoesType() {
@@ -22,9 +23,34 @@ class _MainPageState extends State<MainPage> {
       for (var i = 0; i < value.length; i++) {
         setState(() {
           result.add(value[i]);
+          temp.add(value[i]);
         });
       }
     });
+  }
+
+  void onSearchTextChanged(String text) async {
+    List<SepatuFactory> searchResult = List<SepatuFactory>();
+    searchResult.addAll(temp);
+    if (search != null) {
+      List<SepatuFactory> dummy = List<SepatuFactory>();
+      searchResult.forEach((item) {
+        if (item.nama.toLowerCase().contains(text) ||
+            item.tipe.toLowerCase().contains(text)) {
+          dummy.add(item);
+        }
+      });
+      setState(() {
+        result.clear();
+        result.addAll(dummy);
+      });
+      return;
+    } else {
+      setState(() {
+        result.clear();
+        dataShoesType();
+      });
+    }
   }
 
   @override
@@ -44,6 +70,12 @@ class _MainPageState extends State<MainPage> {
           padding: EdgeInsets.fromLTRB(25, 32, 25, 0),
           child: TextField(
             controller: search,
+            onChanged: (value) {
+              print(value);
+              onSearchTextChanged(value);
+
+              print("lengthe :  $result.length ");
+            },
             decoration: InputDecoration(
               suffix: CustomIcon.search,
               border: InputBorder.none,
@@ -91,9 +123,7 @@ class _MainPageState extends State<MainPage> {
                         children: result.map((data) {
                           return GestureDetector(
                             onTap: () {
-                              setState(() {
-                                name = data.nama;
-                              });
+                              name = data.nama;
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
                                       DetailPage(nama: name)));

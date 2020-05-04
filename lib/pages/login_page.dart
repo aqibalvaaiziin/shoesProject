@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                                             fontWeight: FontWeight.w500),
                                       ),
                                       onPressed: () {
-                                        Navigator.of(context)
+                                        Navigator.of(context,rootNavigator: true)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
                                                     builder: (context) =>

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shoes/pages/login_page.dart';
@@ -30,14 +32,6 @@ class AppRun extends StatefulWidget {
   _AppRunState createState() => _AppRunState();
 }
 
-Future<bool> dataLogin() async {
-  UserPreferences _data = UserPreferences();
-  var data1 = await _data.getTokenCode();
-  var data2 = await _data.getTokenType();
-  bool result = data1 != null && data2 != null;
-  return result;
-}
-
 class _AppRunState extends State<AppRun> {
   @override
   Widget build(BuildContext context) {
@@ -45,13 +39,52 @@ class _AppRunState extends State<AppRun> {
       store: widget.store,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: dataLogin() == true ? '/home' : '/login',
-        routes: {
-          '/login': (context) => LoginPage(),
-          '/home': (context) => MyApp(),
-        },
-        home: MyApp(),
+        home: SplashScreen(),
       ),
     );
   }
+}
+
+class SplashScreen extends StatefulWidget {
+  _SplashScreen createState() => _SplashScreen();
+}
+
+class _SplashScreen extends State<SplashScreen> {
+  void initState() {
+    super.initState();
+    splashscreenStart();
+  }
+
+  splashscreenStart() async {
+    var duration = const Duration(seconds: 9);
+    return Timer(duration, () {
+      Navigator.of(context).push(_createRoute());
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(child: Image.asset("assets/images/logo.gif")),
+    );
+  }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => LoginPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(0.0, 1.0);
+      var end = Offset.zero;
+      var curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }

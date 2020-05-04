@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shoes/factory/cart_factory.dart';
 import 'package:shoes/factory/transaction.dart';
